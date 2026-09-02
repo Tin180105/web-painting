@@ -7,7 +7,7 @@
 
     <title>Đăng ký</title>
 
-    <link rel="stylesheet" href="/web-painting/public/css/style.css">
+    <link rel="stylesheet" href="<?= asset("css/style.css") ?>">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 
     <?php endif; ?>
 
-    <form action="register.php" method="POST">
+    <form action="<?= url("register") ?>" method="POST">
 
         <div>
             <label>Họ và tên</label>
@@ -71,7 +71,7 @@
 
     <p>
         Đã có tài khoản?
-        <a href="login.php">Đăng nhập</a>
+        <a href="<?= url("login") ?>">Đăng nhập</a>
     </p>
 
 </body>

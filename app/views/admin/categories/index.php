@@ -18,7 +18,7 @@ if (!isset($categories)) {
 
     <h1>Quản lý danh mục</h1>
 
-    <a href="create.php">Thêm danh mục</a>
+    <a href="<?= url("admin/categories/create") ?>">Thêm danh mục</a>
 
     <br><br>
 
@@ -67,14 +67,14 @@ if (!isset($categories)) {
                 </td>
 
                 <td>
-                    <a href="edit.php?id=<?= $category["category_id"] ?>">
+                    <a href="<?= url("admin/categories/edit/" . $category["category_id"]) ?>">
                         Sửa
                     </a>
 
                     |
 
                     <a
-                        href="delete.php?id=<?= $category["category_id"] ?>"
+                        href="<?= url("admin/categories/delete/" . $category["category_id"]) ?>"
                         onclick="return confirm('Bạn có chắc muốn xóa danh mục này?')"
                     >
                         Xóa

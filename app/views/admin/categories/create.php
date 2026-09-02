@@ -14,7 +14,7 @@
         <p><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
-    <form method="POST">
+    <form action="<?= url("admin/categories/create") ?>" method="POST">
 
         <div>
             <label>Tên danh mục</label>
@@ -53,7 +53,7 @@
 
     <br>
 
-    <a href="index.php">
+    <a href="<?= url("admin/categories") ?>">
         Quay lại
     </a>
 

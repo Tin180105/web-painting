@@ -1,8 +1,9 @@
 <?php
 
+require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/Category.php";
 
-class CategoryController
+class CategoryController extends Controller
 {
     private $categoryModel;
 
@@ -14,17 +15,43 @@ class CategoryController
     // Danh sách category
     public function index()
     {
-        return $this->categoryModel->getAll();
+        $this->requireAdmin();
+
+        $categories = $this->categoryModel->getAll();
+
+        $this->view("admin/categories/index", [
+            "categories" => $categories,
+            "message" => $_GET["message"] ?? ""
+        ]);
     }
 
-    // Chi tiết category
-    public function show($id)
-    {
-        return $this->categoryModel->getById($id);
-    }
-
-    // Thêm category
+    // Form thêm category
     public function create()
+    {
+        $this->requireAdmin();
+
+        $this->view("admin/categories/create", [
+            "message" => ""
+        ]);
+    }
+
+    // Xử lý thêm category
+    public function store()
+    {
+        $this->requireAdmin();
+
+        $result = $this->processCreate();
+
+        if ($result["success"]) {
+            $this->redirect("admin/categories");
+        }
+
+        $this->view("admin/categories/create", [
+            "message" => $result["message"]
+        ]);
+    }
+
+    private function processCreate()
     {
         $categoryName = trim($_POST["category_name"] ?? "");
         $description = trim($_POST["description"] ?? "");
@@ -37,9 +64,9 @@ class CategoryController
             ];
         }
 
-        $category = $this->categoryModel->getAll();
+        $categories = $this->categoryModel->getAll();
 
-        foreach ($category as $item) {
+        foreach ($categories as $item) {
             if (strtolower($item["category_name"]) === strtolower($categoryName)) {
                 return [
                     "success" => false,
@@ -48,11 +75,7 @@ class CategoryController
             }
         }
 
-        $this->categoryModel->create(
-            $categoryName,
-            $description,
-            $image
-        );
+        $this->categoryModel->create($categoryName, $description, $image);
 
         return [
             "success" => true,
@@ -60,8 +83,47 @@ class CategoryController
         ];
     }
 
-    // Sửa category
+    // Form sửa category
+    public function edit($id)
+    {
+        $this->requireAdmin();
+
+        $category = $this->categoryModel->getById($id);
+
+        if (!$category) {
+            die("Không tìm thấy danh mục");
+        }
+
+        $this->view("admin/categories/edit", [
+            "category" => $category,
+            "message" => ""
+        ]);
+    }
+
+    // Xử lý sửa category
     public function update($id)
+    {
+        $this->requireAdmin();
+
+        $category = $this->categoryModel->getById($id);
+
+        if (!$category) {
+            die("Không tìm thấy danh mục");
+        }
+
+        $result = $this->processUpdate($id);
+
+        if ($result["success"]) {
+            $this->redirect("admin/categories");
+        }
+
+        $this->view("admin/categories/edit", [
+            "category" => $this->categoryModel->getById($id),
+            "message" => $result["message"]
+        ]);
+    }
+
+    private function processUpdate($id)
     {
         $categoryName = trim($_POST["category_name"] ?? "");
         $description = trim($_POST["description"] ?? "");
@@ -74,21 +136,7 @@ class CategoryController
             ];
         }
 
-        $category = $this->categoryModel->getById($id);
-
-        if (!$category) {
-            return [
-                "success" => false,
-                "message" => "Không tìm thấy danh mục"
-            ];
-        }
-
-        $this->categoryModel->update(
-            $id,
-            $categoryName,
-            $description,
-            $image
-        );
+        $this->categoryModel->update($id, $categoryName, $description, $image);
 
         return [
             "success" => true,
@@ -99,30 +147,22 @@ class CategoryController
     // Xóa category
     public function delete($id)
     {
-        try {
+        $this->requireAdmin();
 
+        try {
             $category = $this->categoryModel->getById($id);
 
-            if (!$category) {
-                return [
-                    "success" => false,
-                    "message" => "Không tìm thấy danh mục"
-                ];
+            if ($category) {
+                $this->categoryModel->delete($id);
+                $message = "Xóa danh mục thành công";
+            } else {
+                $message = "Không tìm thấy danh mục";
             }
 
-            $this->categoryModel->delete($id);
-
-            return [
-                "success" => true,
-                "message" => "Xóa danh mục thành công"
-            ];
-
         } catch (PDOException $e) {
-
-            return [
-                "success" => false,
-                "message" => "Không thể xóa danh mục vì đang có tranh thuộc danh mục này"
-            ];
+            $message = "Không thể xóa danh mục vì đang có tranh thuộc danh mục này";
         }
+
+        $this->redirect("admin/categories?message=" . urlencode($message));
     }
 }

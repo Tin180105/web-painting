@@ -20,7 +20,7 @@ if (!isset($category)) {
         <p><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
-    <form method="POST">
+    <form action="<?= url("admin/categories/edit/" . $category["category_id"]) ?>" method="POST">
 
         <div>
             <label>Tên danh mục</label>
@@ -60,7 +60,7 @@ if (!isset($category)) {
 
     <br>
 
-    <a href="index.php">
+    <a href="<?= url("admin/categories") ?>">
         Quay lại
     </a>
 
