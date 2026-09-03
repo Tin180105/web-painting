@@ -25,7 +25,7 @@
             <?php if (isset($_SESSION["user_id"])): ?>
 
                 <a href="<?= BASE_URL ?>/addresses">Địa chỉ</a>
-
+                <a href="<?= BASE_URL ?>/orders">Đơn hàng của tôi</a>
                 <a href="<?= BASE_URL ?>/cart" class="cart-link">
                     Giỏ hàng
                     <span class="cart-badge" id="cart-badge"><?= $cartCount ?></span>
