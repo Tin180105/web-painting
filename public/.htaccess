@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Cho phép truy cập trực tiếp file/thư mục có thật (css, js, ảnh...)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Mọi request còn lại đều chuyển về index.php
+RewriteRule ^ index.php [QSA,L]
