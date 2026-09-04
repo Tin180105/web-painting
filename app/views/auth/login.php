@@ -10,50 +10,46 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
 </head>
 
-<body>
+<body class="auth-page">
 
-    <h1>Đăng nhập</h1>
+    <main class="auth-shell">
+        <section class="auth-intro">
+            <a class="auth-logo" href="<?= BASE_URL ?>/">Painting Shop</a>
+            <p class="auth-kicker">FINE ART GALLERY</p>
+            <h1>Mỗi bức tranh bắt đầu một câu chuyện.</h1>
+            <p>Đăng nhập để lưu lại những tác phẩm bạn yêu thích và theo dõi đơn hàng của mình.</p>
+        </section>
 
-    <?php if (!empty($message)): ?>
+        <section class="auth-panel">
+            <p class="auth-panel-kicker">Chào mừng trở lại</p>
+            <h2>Đăng nhập</h2>
+            <p class="auth-subtitle">Tiếp tục hành trình chọn tác phẩm dành cho bạn.</p>
 
-        <p>
-            <?= htmlspecialchars($message) ?>
-        </p>
+            <?php if (!empty($message)): ?>
+                <p class="auth-message" role="alert"><?= htmlspecialchars($message) ?></p>
+            <?php endif; ?>
 
-    <?php endif; ?>
-
-    <form action="<?= BASE_URL ?>/login" method="POST">
+            <form class="auth-form" action="<?= BASE_URL ?>/login" method="POST">
 
         <div>
             <label>Email</label>
 
-            <input
-                type="email"
-                name="email"
-                required
-            >
+                <input type="email" name="email" autocomplete="email" required>
         </div>
 
         <div>
             <label>Mật khẩu</label>
 
-            <input
-                type="password"
-                name="password"
-                required
-            >
+                <input type="password" name="password" autocomplete="current-password" required>
         </div>
 
-        <button type="submit">
-            Đăng nhập
-        </button>
+                <button class="auth-submit" type="submit">Đăng nhập</button>
 
-    </form>
+            </form>
 
-    <p>
-        Chưa có tài khoản?
-        <a href="<?= BASE_URL ?>/register">Đăng ký</a>
-    </p>
+            <p class="auth-switch">Chưa có tài khoản? <a href="<?= BASE_URL ?>/register">Đăng ký ngay</a></p>
+        </section>
+    </main>
 
 </body>
 
