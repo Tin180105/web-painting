@@ -43,7 +43,15 @@ $router->get("/admin/categories/edit/{id}", "CategoryController@edit");
 $router->post("/admin/categories/edit/{id}", "CategoryController@update");
 $router->get("/admin/categories/delete/{id}", "CategoryController@delete");
 
-// ==== TODO: đơn hàng (orders/order_details) - làm sau khi có luồng thanh toán ====
-// $router->get("/orders", "OrderController@index");
-// $router->post("/orders/checkout", "OrderController@checkout");
+// ==== Client - Đặt hàng & thanh toán (yêu cầu đăng nhập) ====
+$router->get("/checkout", "OrderController@checkout");
+$router->post("/checkout", "OrderController@store");
+$router->get("/orders", "OrderController@index");
+$router->get("/orders/{id}", "OrderController@show");
+$router->get("/orders/{id}/pay", "OrderController@showPayment");
+$router->post("/orders/{id}/pay", "OrderController@pay");
 
+// ==== Admin - Đơn hàng ====
+$router->get("/admin/orders", "AdminOrderController@index");
+$router->get("/admin/orders/{id}", "AdminOrderController@show");
+$router->post("/admin/orders/{id}/status", "AdminOrderController@updateStatus");

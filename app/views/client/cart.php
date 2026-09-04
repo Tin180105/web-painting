@@ -67,7 +67,7 @@
             Tổng cộng: <strong id="cart-total"><?= number_format($total, 0, ",", ".") ?> đ</strong>
         </div>
 
-        <a href="<?= BASE_URL ?>/addresses" class="btn btn-checkout">Tiến hành đặt hàng</a>
+        <a href="<?= BASE_URL ?>/checkout" class="btn btn-checkout">Tiến hành đặt hàng</a>
 
     <?php endif; ?>
 
