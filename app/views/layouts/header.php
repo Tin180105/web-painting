@@ -17,7 +17,7 @@
     <nav class="navbar">
 
         <a class="navbar-brand" href="<?= BASE_URL ?>/">
-            <img src="<?= BASE_URL ?>/images/image.png" alt="" class="brand-logo">
+            <img src="<?= BASE_URL ?>/images/image1.png" alt="" class="brand-logo">
             <span>Painting Shop</span>
         </a>
 
