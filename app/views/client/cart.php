@@ -4,7 +4,7 @@
 
     <?php if (empty($items)): ?>
 
-        <p>Giỏ hàng đang trống. <a href="<?= BASE_URL ?>/">Tiếp tục mua sắm</a></p>
+        <p>Giỏ hàng đang trống. <a class="continue-shopping" href="<?= BASE_URL ?>/">Tiếp tục mua sắm</a></p>
 
     <?php else: ?>
 
