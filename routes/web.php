@@ -55,3 +55,7 @@ $router->post("/orders/{id}/pay", "OrderController@pay");
 $router->get("/admin/orders", "AdminOrderController@index");
 $router->get("/admin/orders/{id}", "AdminOrderController@show");
 $router->post("/admin/orders/{id}/status", "AdminOrderController@updateStatus");
+
+// ==== Admin - Dashboard ====
+$router->get("/admin/dashboard", "AdminController@dashboard");
+$router->get("/admin/login", "AuthController@showLogin");

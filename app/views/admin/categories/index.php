@@ -1,24 +1,12 @@
 <?php
+if (!isset($categories)) { $categories = []; }
+if (!isset($message)) { $message = ""; }
 
-if (!isset($categories)) {
-    $categories = [];
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Quản lý danh mục</title>
-</head>
-
-<body>
+require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
     <h1>Quản lý danh mục</h1>
 
-    <a href="<?= BASE_URL ?>/admin/categories/create">Thêm danh mục</a>
+    <a href="<?= BASE_URL ?>/admin/categories/create" class="btn">Thêm danh mục</a>
 
     <br><br>
 
@@ -26,7 +14,7 @@ if (!isset($categories)) {
         <p><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
-    <table border="1" cellpadding="10">
+    <table class="admin-table">
 
         <tr>
             <th>ID</th>
@@ -38,55 +26,27 @@ if (!isset($categories)) {
         </tr>
 
         <?php foreach ($categories as $category): ?>
-
             <tr>
-
-                <td>
-                    <?= $category["category_id"] ?>
-                </td>
-
-                <td>
-                    <?= htmlspecialchars($category["category_name"]) ?>
-                </td>
-
-                <td>
-                    <?= htmlspecialchars($category["description"] ?? "") ?>
-                </td>
-
+                <td><?= $category["category_id"] ?></td>
+                <td><?= htmlspecialchars($category["category_name"]) ?></td>
+                <td><?= htmlspecialchars($category["description"] ?? "") ?></td>
                 <td>
                     <?php if (!empty($category["image"])): ?>
-                        <img
-                            src="<?= htmlspecialchars($category["image"]) ?>"
-                            width="100"
-                        >
+                        <img src="<?= htmlspecialchars($category["image"]) ?>" width="80">
                     <?php endif; ?>
                 </td>
-
+                <td><?= $category["created_at"] ?></td>
                 <td>
-                    <?= $category["created_at"] ?>
-                </td>
-
-                <td>
-                    <a href="<?= BASE_URL ?>/admin/categories/edit/<?= $category["category_id"] ?>">
-                        Sửa
-                    </a>
-
+                    <a href="<?= BASE_URL ?>/admin/categories/edit/<?= $category["category_id"] ?>">Sửa</a>
                     |
-
-                    <a
-                        href="<?= BASE_URL ?>/admin/categories/delete/<?= $category["category_id"] ?>"
-                        onclick="return confirm('Bạn có chắc muốn xóa danh mục này?')"
-                    >
+                    <a href="<?= BASE_URL ?>/admin/categories/delete/<?= $category["category_id"] ?>"
+                       onclick="return confirm('Bạn có chắc muốn xóa danh mục này?')">
                         Xóa
                     </a>
                 </td>
-
             </tr>
-
         <?php endforeach; ?>
 
     </table>
 
-</body>
-
-</html>
+<?php require __DIR__ . "/../../layouts/admin_footer.php"; ?>
