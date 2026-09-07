@@ -39,12 +39,30 @@ class AdminController extends Controller
             }
         }
 
+        // Sản phẩm đã hết hàng (dùng cho khối "Cần chú ý")
+        $outOfStockCount = 0;
+        // Sản phẩm sắp hết hàng - còn hàng nhưng số lượng thấp (<= 3)
+        $lowStockPaintings = [];
+
+        foreach ($paintings as $painting) {
+            if ($painting["status"] === "out_of_stock" || (int) $painting["quantity"] <= 0) {
+                $outOfStockCount++;
+                continue;
+            }
+
+            if ((int) $painting["quantity"] <= 3) {
+                $lowStockPaintings[] = $painting;
+            }
+        }
+
         $this->render("admin/dashboard", [
             "totalOrders" => count($orders),
             "pendingCount" => $pendingCount,
             "totalRevenue" => $totalRevenue,
             "totalPaintings" => count($paintings),
             "totalCategories" => count($categories),
+            "outOfStockCount" => $outOfStockCount,
+            "lowStockPaintings" => array_slice($lowStockPaintings, 0, 5),
             "recentOrders" => array_slice($orders, 0, 5),
             "activeMenu" => "dashboard",
             "pageTitle" => "Tổng quan"
