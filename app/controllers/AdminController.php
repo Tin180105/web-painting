@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
     // GET /admin/dashboard - trang tổng quan sau khi admin đăng nhập
-    public function dashboard()
+        public function dashboard()
     {
         requireAdmin();
 
@@ -39,9 +39,7 @@ class AdminController extends Controller
             }
         }
 
-        // Sản phẩm đã hết hàng (dùng cho khối "Cần chú ý")
         $outOfStockCount = 0;
-        // Sản phẩm sắp hết hàng - còn hàng nhưng số lượng thấp (<= 3)
         $lowStockPaintings = [];
 
         foreach ($paintings as $painting) {
@@ -55,6 +53,21 @@ class AdminController extends Controller
             }
         }
 
+        // ==== Dữ liệu biểu đồ doanh số theo tháng ====
+        $availableYears = $this->orderModel->getYearsWithOrders();
+
+        if (empty($availableYears)) {
+            $availableYears = [(int) date("Y")];
+        }
+
+        $chartYear = (int) ($_GET["year"] ?? date("Y"));
+
+        if (!in_array($chartYear, $availableYears, true)) {
+            $chartYear = $availableYears[0];
+        }
+
+        $monthlyRevenue = $this->orderModel->getMonthlyRevenue($chartYear);
+
         $this->render("admin/dashboard", [
             "totalOrders" => count($orders),
             "pendingCount" => $pendingCount,
@@ -64,6 +77,9 @@ class AdminController extends Controller
             "outOfStockCount" => $outOfStockCount,
             "lowStockPaintings" => array_slice($lowStockPaintings, 0, 5),
             "recentOrders" => array_slice($orders, 0, 5),
+            "availableYears" => $availableYears,
+            "chartYear" => $chartYear,
+            "monthlyRevenue" => $monthlyRevenue,
             "activeMenu" => "dashboard",
             "pageTitle" => "Tổng quan"
         ]);

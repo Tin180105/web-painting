@@ -145,4 +145,41 @@ class Order
             ":status" => $status
         ]);
     }
+
+        // Doanh thu theo từng tháng trong 1 năm (chỉ tính đơn đã thanh toán)
+    // Trả về mảng 12 phần tử [1 => revenue, 2 => revenue, ..., 12 => revenue]
+    public function getMonthlyRevenue($year)
+    {
+        $sql = "SELECT MONTH(created_at) AS month, SUM(total_amount) AS revenue
+                FROM orders
+                WHERE payment_status = 'paid' AND YEAR(created_at) = :year
+                GROUP BY MONTH(created_at)";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([":year" => $year]);
+
+        $rows = $stmt->fetchAll();
+
+        // Khởi tạo đủ 12 tháng = 0, tránh thiếu tháng không có đơn
+        $result = array_fill(1, 12, 0);
+
+        foreach ($rows as $row) {
+            $result[(int) $row["month"]] = (float) $row["revenue"];
+        }
+
+        return $result;
+    }
+
+    // Danh sách các năm có phát sinh đơn hàng (dùng cho dropdown lọc năm)
+    public function getYearsWithOrders()
+    {
+        $sql = "SELECT DISTINCT YEAR(created_at) AS year
+                FROM orders
+                ORDER BY year DESC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        return array_column($stmt->fetchAll(), "year");
+    }
 }

@@ -25,13 +25,15 @@ class CategoryController extends Controller
         ]);
     }
 
-    // GET /admin/categories/create - hiển thị form thêm
+        // GET /admin/categories/create - hiển thị form thêm
     public function create()
     {
         requireAdmin();
 
         $this->render("admin/categories/create", [
-            "message" => ""
+            "message" => "",
+            "activeMenu" => "categories",
+            "pageTitle" => "Thêm danh mục"
         ]);
     }
 
@@ -46,7 +48,9 @@ class CategoryController extends Controller
 
         if ($categoryName === "") {
             $this->render("admin/categories/create", [
-                "message" => "Tên danh mục không được để trống"
+                "message" => "Tên danh mục không được để trống",
+                "activeMenu" => "categories",
+                "pageTitle" => "Thêm danh mục"
             ]);
             return;
         }
@@ -54,7 +58,9 @@ class CategoryController extends Controller
         foreach ($this->categoryModel->getAll() as $item) {
             if (strtolower($item["category_name"]) === strtolower($categoryName)) {
                 $this->render("admin/categories/create", [
-                    "message" => "Tên danh mục đã tồn tại"
+                    "message" => "Tên danh mục đã tồn tại",
+                    "activeMenu" => "categories",
+                    "pageTitle" => "Thêm danh mục"
                 ]);
                 return;
             }
@@ -78,7 +84,9 @@ class CategoryController extends Controller
 
         $this->render("admin/categories/edit", [
             "category" => $category,
-            "message" => ""
+            "message" => "",
+            "activeMenu" => "categories",
+            "pageTitle" => "Sửa danh mục"
         ]);
     }
 
@@ -100,7 +108,9 @@ class CategoryController extends Controller
         if ($categoryName === "") {
             $this->render("admin/categories/edit", [
                 "category" => $category,
-                "message" => "Tên danh mục không được để trống"
+                "message" => "Tên danh mục không được để trống",
+                "activeMenu" => "categories",
+                "pageTitle" => "Sửa danh mục"
             ]);
             return;
         }

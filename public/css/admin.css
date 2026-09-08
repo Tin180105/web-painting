@@ -483,3 +483,113 @@
         gap: 14px;
     }
 }
+
+/* ===== Chart panel (doanh số theo tháng) ===== */
+.admin-chart-panel {
+    margin-bottom: 24px;
+}
+
+.admin-chart-filter select {
+    min-height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--line-dark);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ===== Form thêm/sửa (dùng cho trang admin/categories/create, edit) ===== */
+.admin-form-card {
+    max-width: 640px;
+    padding: 26px 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.admin-form-card .form-field {
+    margin-bottom: 18px;
+}
+
+.admin-form-card label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-form-card input[type="text"],
+.admin-form-card textarea {
+    width: 100%;
+    max-width: none;
+    padding: 10px 13px;
+    border: 1px solid #d8d9d2;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+}
+
+.admin-form-card textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.admin-form-card input:focus,
+.admin-form-card textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(28, 116, 115, .10);
+}
+
+.admin-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.admin-form-submit {
+    min-height: 42px;
+    padding: 10px 22px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--coral);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.admin-form-submit:hover {
+    background: var(--coral-dark);
+    transform: translateY(-1px);
+}
+
+.admin-form-back {
+    color: var(--muted);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-form-back:hover {
+    color: var(--teal);
+}
+
+.admin-form-preview {
+    margin-top: 10px;
+}
+
+.admin-form-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #eee;
+}

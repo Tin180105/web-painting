@@ -1,62 +1,37 @@
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Thêm danh mục</title>
-</head>
-
-<body>
+<?php require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
     <h1>Thêm danh mục</h1>
 
     <?php if (!empty($message)): ?>
-        <p><?= htmlspecialchars($message) ?></p>
+        <p class="address-message"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
-    <form action="<?= BASE_URL ?>/admin/categories/create" method="POST">
+    <div class="admin-form-card">
 
-        <div>
-            <label>Tên danh mục</label>
-            <input
-                type="text"
-                name="category_name"
-                required
-            >
-        </div>
+        <form action="<?= BASE_URL ?>/admin/categories/create" method="POST">
 
-        <br>
+            <div class="form-field">
+                <label>Tên danh mục</label>
+                <input type="text" name="category_name" required>
+            </div>
 
-        <div>
-            <label>Mô tả</label>
-            <textarea name="description"></textarea>
-        </div>
+            <div class="form-field">
+                <label>Mô tả</label>
+                <textarea name="description"></textarea>
+            </div>
 
-        <br>
+            <div class="form-field">
+                <label>Hình ảnh</label>
+                <input type="text" name="image" placeholder="Đường dẫn hình ảnh">
+            </div>
 
-        <div>
-            <label>Hình ảnh</label>
-            <input
-                type="text"
-                name="image"
-                placeholder="Đường dẫn hình ảnh"
-            >
-        </div>
+            <div class="admin-form-actions">
+                <button type="submit" class="admin-form-submit">Thêm danh mục</button>
+                <a href="<?= BASE_URL ?>/admin/categories" class="admin-form-back">Hủy, quay lại</a>
+            </div>
 
-        <br>
+        </form>
 
-        <button type="submit">
-            Thêm danh mục
-        </button>
+    </div>
 
-    </form>
-
-    <br>
-
-    <a href="<?= BASE_URL ?>/admin/categories">
-        Quay lại
-    </a>
-
-</body>
-
-</html>
+<?php require __DIR__ . "/../../layouts/admin_footer.php"; ?>

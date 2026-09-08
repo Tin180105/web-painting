@@ -85,6 +85,26 @@ require __DIR__ . "/../layouts/admin_header.php";
 
     </div>
 
+    <section class="admin-panel admin-chart-panel">
+
+        <div class="admin-panel-head">
+            <h2>Doanh số theo tháng</h2>
+
+            <form method="GET" action="<?= BASE_URL ?>/admin/dashboard" class="admin-chart-filter">
+                <select name="year" onchange="this.form.submit()">
+                    <?php foreach ($availableYears as $y): ?>
+                        <option value="<?= $y ?>" <?= $y === $chartYear ? "selected" : "" ?>>
+                            Năm <?= $y ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        </div>
+
+        <canvas id="revenueChart" height="90"></canvas>
+
+    </section>
+
     <div class="admin-dashboard-columns">
 
         <section class="admin-panel">
@@ -178,5 +198,44 @@ require __DIR__ . "/../layouts/admin_header.php";
         </aside>
 
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+        const revenueData = <?= json_encode(array_values($monthlyRevenue)) ?>;
+
+        new Chart(document.getElementById("revenueChart"), {
+            type: "bar",
+            data: {
+                labels: ["T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"],
+                datasets: [{
+                    label: "Doanh thu (đã thanh toán) - <?= $chartYear ?>",
+                    data: revenueData,
+                    backgroundColor: "#1c7473",
+                    borderRadius: 6,
+                    maxBarThickness: 40
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => ctx.parsed.y.toLocaleString("vi-VN") + " đ"
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: (value) => Number(value).toLocaleString("vi-VN")
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
 <?php require __DIR__ . "/../layouts/admin_footer.php"; ?>
