@@ -59,3 +59,12 @@ $router->post("/admin/orders/{id}/status", "AdminOrderController@updateStatus");
 // ==== Admin - Dashboard ====
 $router->get("/admin/dashboard", "AdminController@dashboard");
 $router->get("/admin/login", "AuthController@showLogin");
+
+
+// ==== Admin - Sản phẩm ====
+$router->get("/admin/paintings", "AdminPaintingController@index");
+$router->get("/admin/paintings/create", "AdminPaintingController@create");
+$router->post("/admin/paintings/create", "AdminPaintingController@store");
+$router->get("/admin/paintings/edit/{id}", "AdminPaintingController@edit");
+$router->post("/admin/paintings/edit/{id}", "AdminPaintingController@update");
+$router->get("/admin/paintings/delete/{id}", "AdminPaintingController@delete");

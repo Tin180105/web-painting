@@ -64,6 +64,19 @@ class Painting
         return $stmt->fetch();
     }
 
+    public function getAllForAdmin()
+{
+    $sql = "SELECT p.*, c.category_name
+            FROM paintings p
+            JOIN categories c ON p.category_id = c.category_id
+            ORDER BY p.created_at DESC";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
     // Thêm tranh (dùng cho phần quản lý sản phẩm - admin)
     public function create($data)
     {

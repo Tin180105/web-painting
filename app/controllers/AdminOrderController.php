@@ -22,7 +22,9 @@ class AdminOrderController extends Controller
         $this->render("admin/orders/index", [
             "orders" => $this->orderModel->getAll($status),
             "status" => $status,
-            "message" => $_GET["message"] ?? ""
+            "message" => $_GET["message"] ?? "",
+            "activeMenu" => "orders",
+            "pageTitle" => "Quản lý đơn hàng"
         ]);
     }
 
@@ -40,7 +42,9 @@ class AdminOrderController extends Controller
         $this->render("admin/orders/show", [
             "order" => $order,
             "details" => $this->orderModel->getDetails($id),
-            "message" => $_GET["message"] ?? ""
+            "message" => $_GET["message"] ?? "",
+            "activeMenu" => "orders",
+            "pageTitle" => "Đơn hàng #" . $id
         ]);
     }
 
