@@ -70,6 +70,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                             >
                                 Sửa
                             </a>
+                            |
                             <a
                                 href="<?= BASE_URL ?>/admin/paintings/delete/<?= $painting["painting_id"] ?>"
                                 class="admin-table-link"

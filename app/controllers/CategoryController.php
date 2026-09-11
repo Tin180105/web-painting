@@ -36,40 +36,38 @@ class CategoryController extends Controller
             "pageTitle" => "Thêm danh mục"
         ]);
     }
-
     // POST /admin/categories/create - xử lý thêm category
-    // POST /admin/categories/create - xử lý thêm category
-public function store()
-{
-    requireAdmin();
+    public function store()
+    {
+        requireAdmin();
 
-    $categoryName = trim($_POST["category_name"] ?? "");
-    $description = trim($_POST["description"] ?? "");
+        $categoryName = trim($_POST["category_name"] ?? "");
+        $description = trim($_POST["description"] ?? "");
 
-    if ($categoryName === "") {
-        $this->render("admin/categories/create", [
-            "message" => "Tên danh mục không được để trống",
-            "activeMenu" => "categories",
-            "pageTitle" => "Thêm danh mục"
-        ]);
-        return;
-    }
-
-    foreach ($this->categoryModel->getAll() as $item) {
-        if (strtolower($item["category_name"]) === strtolower($categoryName)) {
+        if ($categoryName === "") {
             $this->render("admin/categories/create", [
-                "message" => "Tên danh mục đã tồn tại",
+                "message" => "Tên danh mục không được để trống",
                 "activeMenu" => "categories",
                 "pageTitle" => "Thêm danh mục"
             ]);
             return;
         }
+
+        foreach ($this->categoryModel->getAll() as $item) {
+            if (strtolower($item["category_name"]) === strtolower($categoryName)) {
+                $this->render("admin/categories/create", [
+                    "message" => "Tên danh mục đã tồn tại",
+                    "activeMenu" => "categories",
+                    "pageTitle" => "Thêm danh mục"
+                ]);
+                return;
+            }
+        }
+
+        $this->categoryModel->create($categoryName, $description);
+
+        $this->redirect("/admin/categories");
     }
-
-    $this->categoryModel->create($categoryName, $description);
-
-    $this->redirect("/admin/categories");
-}
 
 
     // GET /admin/categories/edit/{id} - hiển thị form sửa

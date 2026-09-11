@@ -12,7 +12,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
     <div class="admin-form-card">
 
-        <form action="<?= BASE_URL ?>/admin/paintings/create" method="POST">
+        <form action="<?= BASE_URL ?>/admin/paintings/create" method="POST" enctype="multipart/form-data">
 
             <div class="form-field">
                 <label>Danh mục</label>
@@ -68,7 +68,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
             <div class="form-field">
                 <label>Hình ảnh</label>
-                <input type="text" name="image" placeholder="Đường dẫn hình ảnh">
+                <input type="file" name="image" accept="image/*">
             </div>
 
             <div class="form-field">
