@@ -39,10 +39,10 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                             <img src="<?= htmlspecialchars($category["image"]) ?>" width="80">
                         <?php endif; ?>
                     </td>
-                    <td><?= $category["created_at"] ?></td>
-                    <td>
+                                        <td>
                         
                             href="<?= BASE_URL ?>/admin/categories/edit/<?= $category["category_id"] ?>"
+                            class="admin-table-link"
                             data-modal-form
                             data-modal-title="Sửa danh mục"
                         >
@@ -51,6 +51,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                         |
                         
                             href="<?= BASE_URL ?>/admin/categories/delete/<?= $category["category_id"] ?>"
+                            class="admin-table-link"
                             data-modal-delete
                         >
                             Xóa

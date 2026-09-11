@@ -33,11 +33,18 @@ class AuthController extends Controller
             return;
         }
 
-        $user = $this->userModel->findByEmail($email);
+                $user = $this->userModel->findByEmail($email);
 
         if (!$user || !password_verify($password, $user["password"])) {
             $this->render("auth/login", [
                 "message" => "Email hoặc mật khẩu không đúng"
+            ]);
+            return;
+        }
+
+        if ($user["status"] === "locked") {
+            $this->render("auth/login", [
+                "message" => "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên."
             ]);
             return;
         }

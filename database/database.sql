@@ -143,3 +143,6 @@ CREATE TABLE order_details (
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
+
+ALTER TABLE users
+ADD COLUMN status ENUM('active', 'locked') NOT NULL DEFAULT 'active' AFTER role;

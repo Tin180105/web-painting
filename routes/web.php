@@ -68,3 +68,9 @@ $router->post("/admin/paintings/create", "AdminPaintingController@store");
 $router->get("/admin/paintings/edit/{id}", "AdminPaintingController@edit");
 $router->post("/admin/paintings/edit/{id}", "AdminPaintingController@update");
 $router->get("/admin/paintings/delete/{id}", "AdminPaintingController@delete");
+
+// ==== Admin - Tài khoản ====
+$router->get("/admin/users", "AdminUserController@index");
+$router->get("/admin/users/lock/{id}", "AdminUserController@lock");
+$router->get("/admin/users/unlock/{id}", "AdminUserController@unlock");
+$router->get("/admin/users/{id}", "AdminUserController@show");

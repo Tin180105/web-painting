@@ -164,6 +164,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+        async function handleConfirmAction(url, message, successMessage) {
+        showConfirm(message, async () => {
+            try {
+                const res = await fetch(url);
+                const html = await res.text();
+
+                if (document.getElementById("admin-list-container")) {
+                    swapListContainer(html);
+                    showToast(successMessage);
+                } else {
+                    // Trang chi tiết (không có list để swap) -> reload lại
+                    window.location.reload();
+                }
+            } catch (err) {
+                showToast("Có lỗi xảy ra, vui lòng thử lại", true);
+            }
+        });
+    }
     // Dùng event delegation để vẫn hoạt động kể cả khi bảng danh sách được thay mới
     document.addEventListener("click", (e) => {
         const addOrEditLink = e.target.closest("[data-modal-form]");
@@ -177,6 +195,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (deleteLink) {
             e.preventDefault();
             handleDelete(deleteLink.href);
+        }
+
+        const confirmActionLink = e.target.closest("[data-confirm-action]");
+        if (confirmActionLink) {
+            e.preventDefault();
+            handleConfirmAction(
+                confirmActionLink.href,
+                confirmActionLink.dataset.confirmMessage || "Bạn có chắc muốn thực hiện hành động này?",
+                confirmActionLink.dataset.successMessage || "Đã cập nhật thành công"
+            );
+            return;
         }
     });
 });

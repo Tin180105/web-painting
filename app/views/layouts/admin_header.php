@@ -34,13 +34,19 @@ if (!isset($activeMenu)) { $activeMenu = ""; }
                     Danh mục
                 </a>
                 
-                <a href="<?= BASE_URL ?>/admin/paintings" class="<?= $activeMenu === "paintings" ? "active" : "" ?>">
+                                <a href="<?= BASE_URL ?>/admin/paintings" class="<?= $activeMenu === "paintings" ? "active" : "" ?>">
                     <svg class="admin-menu-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"></path><line x1="7" y1="20" x2="17" y2="20"></line><line x1="12" y1="16" x2="12" y2="20"></line></svg>
                     Sản phẩm
+                </a>
 
                 <a href="<?= BASE_URL ?>/admin/orders" class="<?= $activeMenu === "orders" ? "active" : "" ?>">
                     <svg class="admin-menu-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
                     Đơn hàng
+                </a>
+
+                <a href="<?= BASE_URL ?>/admin/users" class="<?= $activeMenu === "users" ? "active" : "" ?>">
+                    <svg class="admin-menu-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Tài khoản
                 </a>
 
             </nav>

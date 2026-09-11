@@ -47,7 +47,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                     <th>Thao tác</th>
                 </tr>
 
-                <?php foreach ($paintings as $painting): [$statusLabel, $statusClass] = paintingStatusMeta($painting["status"]); ?>
+                                <?php foreach ($paintings as $painting): [$statusLabel, $statusClass] = paintingStatusMeta($painting["status"]); ?>
                     <tr>
                         <td>
                             <img
