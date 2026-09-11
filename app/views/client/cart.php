@@ -4,7 +4,7 @@
 
     <?php if (empty($items)): ?>
 
-        <p>Giỏ hàng đang trống. <a class="continue-shopping" href="<?= BASE_URL ?>/">Tiếp tục mua sắm</a></p>
+        <p>Giỏ hàng đang trống. <a class="continue" href="<?= BASE_URL ?>/">Tiếp tục mua sắm</a></p>
 
     <?php else: ?>
 
@@ -22,7 +22,7 @@
 
                 <tr data-cart-row data-cart-detail-id="<?= $item["cart_detail_id"] ?>">
 
-                    <td class="cart-product">
+                    <td class="cart-prod">
                         <img
                             src="<?= htmlspecialchars($item["image"] ?: "https://via.placeholder.com/80") ?>"
                             width="60"
@@ -35,11 +35,11 @@
                     </td>
 
                     <td>
-                        <div class="quantity-box">
+                        <div class="qty">
                             <button type="button" data-cart-qty-decrease>-</button>
                             <input
                                 type="number"
-                                class="cart-qty-input"
+                                class="qty-input"
                                 value="<?= $item["quantity"] ?>"
                                 min="1"
                                 max="<?= $item["stock"] ?>"
@@ -67,7 +67,7 @@
             Tổng cộng: <strong id="cart-total"><?= number_format($total, 0, ",", ".") ?> đ</strong>
         </div>
 
-        <a href="<?= BASE_URL ?>/checkout" class="btn btn-checkout">Tiến hành đặt hàng</a>
+        <a href="<?= BASE_URL ?>/checkout" class="btn checkout">Tiến hành đặt hàng</a>
 
     <?php endif; ?>
 

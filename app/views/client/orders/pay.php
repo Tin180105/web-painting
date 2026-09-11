@@ -23,7 +23,7 @@ require __DIR__ . "/../../layouts/header.php"; ?>
 
         <br>
 
-        <button type="submit" class="btn btn-checkout">Thanh toán</button>
+        <button type="submit" class="btn checkout">Thanh toán</button>
 
     </form>
 

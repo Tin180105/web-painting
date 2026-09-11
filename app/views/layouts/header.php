@@ -14,14 +14,14 @@
 
 <body>
 
-    <nav class="navbar">
+    <nav class="nav">
 
-        <a class="navbar-brand" href="<?= BASE_URL ?>/">
-            <img src="<?= BASE_URL ?>/images/image1.png" alt="" class="brand-logo">
+        <a class="nav-brand" href="<?= BASE_URL ?>/">
+            <img src="<?= BASE_URL ?>/images/image1.png" alt="" class="logo">
             <span>Painting Shop</span>
         </a>
 
-        <div class="navbar-links">
+        <div class="nav-links">
 
             <a href="<?= BASE_URL ?>/">Trang chủ</a>
 
@@ -34,7 +34,7 @@
                     <span class="cart-badge" id="cart-badge"><?= $cartCount ?></span>
                 </a>
 
-                <span class="navbar-user">
+                <span class="nav-user">
                     Xin chào, <?= htmlspecialchars($_SESSION["full_name"] ?? "") ?>
                 </span>
 

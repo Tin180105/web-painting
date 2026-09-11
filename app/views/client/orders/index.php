@@ -26,7 +26,7 @@
                     <td><?= $order["payment_status"] === "paid" ? "Đã thanh toán" : "Chưa thanh toán" ?></td>
                     <td><?= htmlspecialchars($order["status"]) ?></td>
                     <td>
-                        <a href="<?= BASE_URL ?>/orders/<?= $order["order_id"] ?>" class="order-view-link">Xem</a>
+                        <a href="<?= BASE_URL ?>/orders/<?= $order["order_id"] ?>" class="order-link">Xem</a>
                         <?php if ($order["payment_status"] !== "paid"): ?>
                             | <a href="<?= BASE_URL ?>/orders/<?= $order["order_id"] ?>/pay">Thanh toán</a>
                         <?php endif; ?>

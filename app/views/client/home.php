@@ -1,34 +1,34 @@
 <?php require __DIR__ . "/../layouts/header.php"; ?>
 
-<section class="hero-banner">
-    <div class="hero-banner-content">
-        <div class="hero-banner-text">
-            <p class="hero-kicker">PAINTING SHOP</p>
+<section class="hero">
+    <div class="hero-wrap">
+        <div class="hero-copy">
+            <p class="hero-tag">PAINTING SHOP</p>
             <h2>
                 Nghệ thuật<br>
                 <span>chạm đến cảm xúc</span>
             </h2>
-            <p class="hero-description">
+            <p class="hero-desc">
                 Khám phá những tác phẩm nghệ thuật độc đáo, mang vẻ đẹp và cảm xúc vào không gian sống của bạn.
             </p>
-            <a href="#painting-list" class="hero-button">
+            <a href="#painting-list" class="hero-btn">
                 Khám phá tranh
             </a>
         </div>
-        <div class="hero-banner-art">
-            <div class="art-frame art-frame-1">
+        <div class="hero-art">
+            <div class="frame frame-1">
                 <img
                     src="<?= BASE_URL ?>/images/banner-painting-1.png"
                     alt="Tranh nghệ thuật"
                 >
             </div>
-            <div class="art-frame art-frame-2">
+            <div class="frame frame-2">
                 <img
                     src="<?= BASE_URL ?>/images/banner-painting-2.png"
                     alt="Tranh nghệ thuật"
                 >
             </div>
-            <div class="art-frame art-frame-3">
+            <div class="frame frame-3">
                 <img
                     src="<?= BASE_URL ?>/images/banner-painting-3.png"
                     alt="Tranh nghệ thuật"
@@ -38,16 +38,16 @@
     </div>
 </section>
 
-<section id="painting-list" class="painting-section">
+<section id="painting-list" class="paint-sec">
 
-    <div class="painting-heading">
+    <div class="paint-head">
         <p class="section-kicker">BỘ SƯU TẬP</p>
         <h1>Danh sách tranh</h1>
         <p>
             Những tác phẩm được chọn lọc để mang nghệ thuật đến gần hơn với không gian của bạn.
         </p>
     </div>
-    <form class="filter-bar" method="GET" action="<?= BASE_URL ?>/">
+    <form class="filters" method="GET" action="<?= BASE_URL ?>/">
         <select name="category_id">
             <option value="">-- Tất cả danh mục --</option>
             <?php foreach ($categories as $category): ?>
@@ -90,13 +90,13 @@
         </button>
     </form>
     <?php if (empty($paintings)): ?>
-        <p class="empty-products">
+        <p class="empty">
             Không tìm thấy tranh nào phù hợp.
         </p>
     <?php else: ?>
-        <div class="product-grid">
+        <div class="products">
             <?php foreach ($paintings as $painting): ?>
-                <div class="product-card">
+                <div class="product">
                     <a href="<?= BASE_URL ?>/products/<?= $painting["painting_id"] ?>">
                         <img
                             src="<?= htmlspecialchars(
@@ -104,22 +104,22 @@
                                     ?: "https://via.placeholder.com/300x220?text=No+Image"
                             ) ?>"
                             alt="<?= htmlspecialchars($painting["painting_name"]) ?>"
-                            class="product-image"
+                            class="prod-img"
                         >
                     </a>
-                    <div class="product-info">
+                    <div class="prod-info">
                         <a
                             href="<?= BASE_URL ?>/products/<?= $painting["painting_id"] ?>"
-                            class="product-name"
+                            class="prod-name"
                         >
                             <?= htmlspecialchars($painting["painting_name"]) ?>
                         </a>
 
-                        <p class="product-category">
+                        <p class="prod-cat">
                             <?= htmlspecialchars($painting["category_name"]) ?>
                         </p>
 
-                        <p class="product-price">
+                        <p class="price">
                             <?= number_format($painting["price"], 0, ",", ".") ?> đ
                         </p>
                         <?php if (

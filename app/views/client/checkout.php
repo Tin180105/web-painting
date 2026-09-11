@@ -22,7 +22,7 @@ require __DIR__ . "/../layouts/header.php"; ?>
 
         <?php foreach ($items as $item): ?>
             <tr>
-                <td class="cart-product">
+                <td class="cart-prod">
                     <img src="<?= htmlspecialchars($item["image"] ?: "https://via.placeholder.com/60") ?>" width="60">
                     <?= htmlspecialchars($item["painting_name"]) ?>
                 </td>
@@ -85,7 +85,7 @@ require __DIR__ . "/../layouts/header.php"; ?>
 
             <br>
 
-            <button type="submit" class="btn btn-checkout">Đặt hàng</button>
+            <button type="submit" class="btn checkout">Đặt hàng</button>
 
         </form>
 

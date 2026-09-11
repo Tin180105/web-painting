@@ -10,23 +10,23 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
 </head>
 
-<body class="auth-page">
+<body class="auth">
 
-    <main class="auth-shell">
-        <section class="auth-intro">
+    <main class="auth-wrap">
+        <section class="auth-info">
             <a class="auth-logo" href="<?= BASE_URL ?>/">Painting Shop</a>
-            <p class="auth-kicker">FINE ART GALLERY</p>
+            <p class="auth-tag">FINE ART GALLERY</p>
             <h1>Mỗi bức tranh bắt đầu một câu chuyện.</h1>
             <p>Đăng nhập để lưu lại những tác phẩm bạn yêu thích và theo dõi đơn hàng của mình.</p>
         </section>
 
-        <section class="auth-panel">
-            <p class="auth-panel-kicker">Chào mừng trở lại</p>
+        <section class="auth-box">
+            <p class="auth-box-tag">Chào mừng trở lại</p>
             <h2>Đăng nhập</h2>
-            <p class="auth-subtitle">Tiếp tục hành trình chọn tác phẩm dành cho bạn.</p>
+            <p class="auth-sub">Tiếp tục hành trình chọn tác phẩm dành cho bạn.</p>
 
             <?php if (!empty($message)): ?>
-                <p class="auth-message" role="alert"><?= htmlspecialchars($message) ?></p>
+                <p class="msg" role="alert"><?= htmlspecialchars($message) ?></p>
             <?php endif; ?>
 
             <form class="auth-form" action="<?= BASE_URL ?>/login" method="POST">

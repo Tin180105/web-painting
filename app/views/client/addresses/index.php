@@ -16,11 +16,11 @@
 
     <?php else: ?>
 
-        <div class="address-list">
+        <div class="addr-list">
 
             <?php foreach ($addresses as $address): ?>
 
-                <div class="address-card" data-address-row data-address-id="<?= $address["address_id"] ?>">
+                <div class="addr-card" data-address-row data-address-id="<?= $address["address_id"] ?>">
 
                     <?php if ($address["is_default"]): ?>
                         <span class="badge-default">Mặc định</span>
@@ -35,7 +35,7 @@
                         <?= htmlspecialchars($address["province"]) ?>
                     </p>
 
-                    <div class="address-actions">
+                    <div class="addr-actions">
 
                         <a href="<?= BASE_URL ?>/addresses/edit/<?= $address["address_id"] ?>">Sửa</a>
 
