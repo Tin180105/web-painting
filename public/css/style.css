@@ -2059,7 +2059,7 @@ form select:focus {
 .auth-logo {
     align-self: flex-start;
 
-    margin-bottom: auto;
+    margin-bottom: 0;
 
     color: #fff;
 
@@ -2069,6 +2069,22 @@ form select:focus {
         serif;
 
     font-size: 26px;
+}
+
+
+.auth-logo-image {
+    align-self: center;
+
+    width: 140px;
+    height: 140px;
+
+    margin-top: 36px;
+    margin-bottom: auto;
+
+    border: 3px solid #fff;
+    border-radius: 50%;
+
+    object-fit: cover;
 }
 
 

@@ -15,6 +15,7 @@
     <main class="auth-wrap">
         <section class="auth-info">
             <a class="auth-logo" href="<?= BASE_URL ?>/">Painting Shop</a>
+            <img class="auth-logo-image" src="<?= BASE_URL ?>/images/image1.png" alt="Logo Painting Shop">
             <p class="auth-tag">FINE ART GALLERY</p>
             <h1>Đưa sắc màu vào không gian sống.</h1>
             <p>Tạo tài khoản để khám phá bộ sưu tập, lưu lựa chọn yêu thích và mua sắm thuận tiện hơn.</p>
