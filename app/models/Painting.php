@@ -153,14 +153,21 @@ class Painting
     public function decreaseStock($id, $quantity)
     {
         $sql = "UPDATE paintings
-                SET quantity = quantity - :quantity
-                WHERE painting_id = :id AND quantity >= :quantity";
+                SET quantity = quantity - :decrease_quantity,
+                    status = CASE
+                        WHEN quantity = 0 THEN 'out_of_stock'
+                        ELSE status
+                    END
+                WHERE painting_id = :id AND quantity >= :required_quantity";
 
         $stmt = $this->conn->prepare($sql);
 
-        return $stmt->execute([
+        $stmt->execute([
             ":id" => $id,
-            ":quantity" => $quantity
+            ":decrease_quantity" => $quantity,
+            ":required_quantity" => $quantity
         ]);
+
+        return $stmt->rowCount() === 1;
     }
 }

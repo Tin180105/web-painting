@@ -86,14 +86,35 @@ class OrderController extends Controller
         }
 
         $total = $this->cartModel->getTotal($cartId);
-        $orderId = $this->orderModel->create($userId, $addressId, $total, $paymentMethod, $note);
 
-        foreach ($items as $item) {
-            $this->orderModel->addDetail($orderId, $item["painting_id"], $item["quantity"], $item["price"]);
-            $this->paintingModel->decreaseStock($item["painting_id"], $item["quantity"]);
+        try {
+            $this->conn->beginTransaction();
+
+            $orderId = $this->orderModel->create($userId, $addressId, $total, $paymentMethod, $note);
+
+            foreach ($items as $item) {
+                if (!$this->paintingModel->decreaseStock($item["painting_id"], $item["quantity"])) {
+                    throw new RuntimeException("Sản phẩm không còn đủ số lượng tồn kho");
+                }
+
+                $this->orderModel->addDetail($orderId, $item["painting_id"], $item["quantity"], $item["price"]);
+            }
+
+            $this->cartModel->clear($cartId);
+            $this->conn->commit();
+        } catch (Throwable $exception) {
+            if ($this->conn->inTransaction()) {
+                $this->conn->rollBack();
+            }
+
+            $this->render("client/checkout", [
+                "items" => $this->cartModel->getItems($cartId),
+                "total" => $this->cartModel->getTotal($cartId),
+                "addresses" => $this->addressModel->getAllByUserId($userId),
+                "message" => $exception->getMessage()
+            ]);
+            return;
         }
-
-        $this->cartModel->clear($cartId);
 
         $this->redirect("/orders/" . $orderId . "/pay");
     }
