@@ -30,7 +30,7 @@ require __DIR__ . "/../../layouts/header.php"; ?>
 
         <?php foreach ($details as $item): ?>
             <tr>
-                <td class="cart-product">
+                <td class="cart-prod">
                     <img src="<?= htmlspecialchars($item["image"] ?: "https://via.placeholder.com/60") ?>" width="60">
                     <?= htmlspecialchars($item["painting_name"]) ?>
                 </td>
@@ -47,7 +47,7 @@ require __DIR__ . "/../../layouts/header.php"; ?>
 
     <?php if ($order["payment_status"] !== "paid"): ?>
         <br>
-        <a href="<?= BASE_URL ?>/orders/<?= $order["order_id"] ?>/pay" class="btn btn-checkout">Thanh toán ngay</a>
+        <a href="<?= BASE_URL ?>/orders/<?= $order["order_id"] ?>/pay" class="btn checkout">Thanh toán ngay</a>
     <?php endif; ?>
 
     <br><br>

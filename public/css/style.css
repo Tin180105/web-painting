@@ -133,7 +133,7 @@ p {
 /* =========================================================
    5. NAVBAR
    ========================================================= */
-.navbar {
+.nav {
     position: relative;
     z-index: 1000;
     display: flex;
@@ -148,7 +148,7 @@ p {
     box-shadow:
         0 5px 20px rgba(32, 42, 45, .12);
 }
-.navbar-brand {
+.nav-brand {
     display: inline-flex;
     align-items: center;
     gap: 11px;
@@ -159,10 +159,10 @@ p {
     text-decoration: none;
     white-space: nowrap;
 }
-.navbar-brand:hover {
+.nav-brand:hover {
     color: #fff;
 }
-.brand-logo {
+.logo {
     width: 48px;
     height: 48px;
 
@@ -183,7 +183,7 @@ p {
 }
 
 
-.navbar-links {
+.nav-links {
     display: flex;
 
     align-items: center;
@@ -196,7 +196,7 @@ p {
 }
 
 
-.navbar-links a {
+.nav-links a {
     margin: 0;
 
     color: #f7f4ee;
@@ -211,14 +211,14 @@ p {
 }
 
 
-.navbar-links a:hover {
+.nav-links a:hover {
     color: var(--gold);
 
     text-decoration: none;
 }
 
 
-.navbar-user {
+.nav-user {
     margin: 0;
 
     color: #cbd5d2;
@@ -314,7 +314,7 @@ p {
    7. HERO BANNER
    ========================================================= */
 
-.hero-banner {
+.hero {
     position: relative;
 
     width: 100vw;
@@ -341,7 +341,7 @@ p {
 }
 
 
-.hero-banner::before {
+.hero::before {
     content: "";
 
     position: absolute;
@@ -360,7 +360,7 @@ p {
 }
 
 
-.hero-banner::after {
+.hero::after {
     content: "";
 
     position: absolute;
@@ -379,7 +379,7 @@ p {
 }
 
 
-.hero-banner-content {
+.hero-wrap {
     position: relative;
 
     z-index: 2;
@@ -407,14 +407,14 @@ p {
 
 /* Banner text */
 
-.hero-banner-text {
+.hero-copy {
     width: 48%;
 
     padding-left: 15px;
 }
 
 
-.hero-kicker {
+.hero-tag {
     margin: 0 0 10px;
 
     color: var(--coral-dark);
@@ -426,7 +426,7 @@ p {
 }
 
 
-.hero-banner-text h2 {
+.hero-copy h2 {
     margin: 0 0 18px;
 
     color: var(--ink);
@@ -438,12 +438,12 @@ p {
 }
 
 
-.hero-banner-text h2 span {
+.hero-copy h2 span {
     color: var(--teal);
 }
 
 
-.hero-description {
+.hero-desc {
     max-width: 500px;
 
     margin: 0 0 26px;
@@ -456,7 +456,7 @@ p {
 }
 
 
-.hero-button {
+.hero-btn {
     display: inline-flex;
 
     align-items: center;
@@ -484,7 +484,7 @@ p {
 }
 
 
-.hero-button:hover {
+.hero-btn:hover {
     background: var(--coral-dark);
 
     color: #fff;
@@ -501,7 +501,7 @@ p {
    8. HERO ARTWORK
    ========================================================= */
 
-.hero-banner-art {
+.hero-art {
     position: relative;
 
     width: 48%;
@@ -510,7 +510,7 @@ p {
 }
 
 
-.art-frame {
+.frame {
     position: absolute;
 
     overflow: hidden;
@@ -528,7 +528,7 @@ p {
 }
 
 
-.art-frame img {
+.frame img {
     display: block;
 
     width: 100%;
@@ -540,7 +540,7 @@ p {
 
 /* Image 1 */
 
-.art-frame-1 {
+.frame-1 {
     top: 40px;
     right: 240px;
 
@@ -555,7 +555,7 @@ p {
 
 /* Image 2 */
 
-.art-frame-2 {
+.frame-2 {
     top: 15px;
     right: 75px;
 
@@ -570,7 +570,7 @@ p {
 
 /* Image 3 */
 
-.art-frame-3 {
+.frame-3 {
     top: 75px;
     right: -15px;
 
@@ -583,7 +583,7 @@ p {
 }
 
 
-.art-frame:hover {
+.frame:hover {
     z-index: 10;
 
     transform:
@@ -599,12 +599,12 @@ p {
    9. PAINTING SECTION
    ========================================================= */
 
-.painting-section {
+.paint-sec {
     scroll-margin-top: 30px;
 }
 
 
-.painting-heading {
+.paint-head {
     max-width: 700px;
 
     margin: 0 auto 32px;
@@ -613,12 +613,12 @@ p {
 }
 
 
-.painting-heading .section-kicker {
+.paint-head .section-kicker {
     margin: 0 0 8px;
 }
 
 
-.painting-heading h1 {
+.paint-head h1 {
     margin: 0 0 12px;
 
     font-size:
@@ -626,7 +626,7 @@ p {
 }
 
 
-.painting-heading > p:last-child {
+.paint-head > p:last-child {
     max-width: 600px;
 
     margin: 0 auto;
@@ -656,7 +656,7 @@ p {
    10. FILTER BAR
    ========================================================= */
 
-.filter-bar {
+.filters {
     display: grid;
 
     grid-template-columns:
@@ -687,8 +687,8 @@ p {
 }
 
 
-.filter-bar input,
-.filter-bar select {
+.filters input,
+.filters select {
     width: 100%;
 
     height: 50px;
@@ -715,19 +715,19 @@ p {
 }
 
 
-.filter-bar input::placeholder {
+.filters input::placeholder {
     color: #9a9f9e;
 }
 
 
-.filter-bar input:hover,
-.filter-bar select:hover {
+.filters input:hover,
+.filters select:hover {
     border-color: #b9c9c4;
 }
 
 
-.filter-bar input:focus,
-.filter-bar select:focus {
+.filters input:focus,
+.filters select:focus {
     border-color: var(--teal);
 
     box-shadow:
@@ -735,12 +735,12 @@ p {
 }
 
 
-.filter-bar select {
+.filters select {
     cursor: pointer;
 }
 
 
-.filter-bar button {
+.filters button {
     display: flex;
 
     align-items: center;
@@ -771,7 +771,7 @@ p {
 }
 
 
-.filter-bar button:hover {
+.filters button:hover {
     background: var(--teal-dark);
 
     transform:
@@ -782,7 +782,7 @@ p {
 }
 
 
-.filter-bar button:active {
+.filters button:active {
     transform:
         translateY(0);
 }
@@ -792,7 +792,7 @@ p {
    11. PRODUCT GRID
    ========================================================= */
 
-.product-grid {
+.products {
     display: grid;
 
     grid-template-columns:
@@ -802,7 +802,7 @@ p {
 }
 
 
-.product-card {
+.product {
     overflow: hidden;
 
     border: 1px solid var(--line);
@@ -820,7 +820,7 @@ p {
 }
 
 
-.product-card:hover {
+.product:hover {
     border-color: #d5dcd8;
 
     transform:
@@ -830,7 +830,7 @@ p {
 }
 
 
-.product-image {
+.prod-img {
     display: block;
 
     width: 100%;
@@ -845,18 +845,18 @@ p {
 }
 
 
-.product-card:hover .product-image {
+.product:hover .prod-img {
     transform:
         scale(1.03);
 }
 
 
-.product-info {
+.prod-info {
     padding: 18px;
 }
 
 
-.product-name {
+.prod-name {
     display: block;
 
     margin-bottom: 7px;
@@ -880,12 +880,12 @@ p {
 }
 
 
-.product-name:hover {
+.prod-name:hover {
     color: var(--teal);
 }
 
 
-.product-category {
+.prod-cat {
     margin: 0 0 8px;
 
     color: var(--muted);
@@ -894,7 +894,7 @@ p {
 }
 
 
-.product-price {
+.price {
     margin: 0 0 14px;
 
     color: var(--coral-dark);
@@ -1022,19 +1022,19 @@ p {
 }
 
 
-.btn-checkout {
+.checkout {
     margin-top: 16px;
 
     background: var(--coral);
 }
 
 
-.btn-checkout:hover {
+.checkout:hover {
     background: var(--coral-dark);
 }
 
 
-.continue-shopping {
+.continue {
     display: inline-flex;
 
     align-items: center;
@@ -1060,7 +1060,7 @@ p {
 }
 
 
-.continue-shopping:hover {
+.continue:hover {
     background: var(--teal);
     color: #fff;
 
@@ -1070,7 +1070,7 @@ p {
 }
 
 
-.continue-shopping:focus-visible {
+.continue:focus-visible {
     outline: 3px solid rgba(28, 116, 115, .22);
 
     outline-offset: 2px;
@@ -1081,7 +1081,7 @@ p {
    13. PRODUCT DETAIL
    ========================================================= */
 
-.product-detail {
+.detail {
     display: flex;
 
     align-items: flex-start;
@@ -1102,7 +1102,7 @@ p {
 }
 
 
-.product-detail-image {
+.detail-img {
     width: 440px;
     max-width: 100%;
 
@@ -1116,19 +1116,19 @@ p {
 }
 
 
-.product-detail-info {
+.detail-info {
     flex: 1;
 
     min-width: 280px;
 }
 
 
-.product-detail-info h1 {
+.detail-info h1 {
     margin-bottom: 12px;
 }
 
 
-.product-detail-info .product-price {
+.detail-info .price {
     margin: 20px 0;
 
     font-size: 26px;
@@ -1139,7 +1139,7 @@ p {
    14. QUANTITY
    ========================================================= */
 
-.quantity-box {
+.qty {
     display: inline-flex;
 
     align-items: center;
@@ -1158,7 +1158,7 @@ p {
 }
 
 
-.quantity-box button {
+.qty button {
     width: 38px;
     height: 38px;
 
@@ -1178,15 +1178,15 @@ p {
 }
 
 
-.quantity-box button:hover {
+.qty button:hover {
     background: var(--teal-light);
 
     color: var(--teal);
 }
 
 
-.quantity-box input,
-.cart-qty-input {
+.qty input,
+.qty-input {
     width: 55px;
     height: 38px;
 
@@ -1209,10 +1209,10 @@ p {
 
 /* Remove number arrows */
 
-.quantity-box input::-webkit-inner-spin-button,
-.quantity-box input::-webkit-outer-spin-button,
-.cart-qty-input::-webkit-inner-spin-button,
-.cart-qty-input::-webkit-outer-spin-button {
+.qty input::-webkit-inner-spin-button,
+.qty input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button,
+.qty-input::-webkit-outer-spin-button {
     margin: 0;
 
     appearance: none;
@@ -1275,7 +1275,7 @@ p {
 }
 
 
-.order-view-link {
+.order-link {
     display: inline-flex;
 
     align-items: center;
@@ -1304,7 +1304,7 @@ p {
 }
 
 
-.order-view-link:hover {
+.order-link:hover {
     background: var(--teal);
 
     color: #fff;
@@ -1315,14 +1315,14 @@ p {
 }
 
 
-.order-view-link:focus-visible {
+.order-link:focus-visible {
     outline: 3px solid rgba(28, 116, 115, .24);
 
     outline-offset: 2px;
 }
 
 
-.cart-product {
+.cart-prod {
     display: flex;
 
     align-items: center;
@@ -1335,7 +1335,7 @@ p {
 }
 
 
-.cart-product img {
+.cart-prod img {
     width: 60px;
     height: 60px;
 
@@ -1378,14 +1378,14 @@ p {
 }
 
 
-.address-form-page {
+.addr-form-page {
     width: min(920px, 100%);
 
     margin: 0 auto;
 }
 
 
-.address-heading {
+.addr-head {
     max-width: 650px;
 
     margin: 0 auto 28px;
@@ -1394,12 +1394,12 @@ p {
 }
 
 
-.address-heading h1 {
+.addr-head h1 {
     margin-bottom: 12px;
 }
 
 
-.address-heading > p:last-child {
+.addr-head > p:last-child {
     margin: 0;
 
     color: var(--muted);
@@ -1466,7 +1466,7 @@ p {
 
 /* Address list */
 
-.address-list {
+.addr-list {
     display: flex;
 
     flex-direction: column;
@@ -1481,7 +1481,7 @@ p {
 }
 
 
-.address-card {
+.addr-card {
     position: relative;
 
     padding: 24px 26px 20px;
@@ -1502,7 +1502,7 @@ p {
 }
 
 
-.address-card:hover {
+.addr-card:hover {
     border-color: #c8d8d2;
 
     box-shadow:
@@ -1515,7 +1515,7 @@ p {
 
 /* Address recipient */
 
-.address-card-topline {
+.addr-top {
     display: flex;
 
     align-items: flex-start;
@@ -1630,7 +1630,7 @@ p {
 
 /* Address actions */
 
-.address-actions {
+.addr-actions {
     display: flex;
 
     align-items: center;
@@ -1647,8 +1647,8 @@ p {
 }
 
 
-.address-card .address-actions > a,
-.address-card .address-actions > button {
+.addr-card .addr-actions > a,
+.addr-card .addr-actions > button {
     display: inline-flex;
 
     align-items: center;
@@ -1680,7 +1680,7 @@ p {
 }
 
 
-.address-card .address-actions > a {
+.addr-card .addr-actions > a {
     border-color: var(--teal);
 
     background: var(--teal);
@@ -1689,7 +1689,7 @@ p {
 }
 
 
-.address-card .address-actions > a:hover {
+.addr-card .addr-actions > a:hover {
     border-color: var(--teal-dark);
 
     background: var(--teal-dark);
@@ -1698,7 +1698,7 @@ p {
 }
 
 
-.address-card .address-actions > button {
+.addr-card .addr-actions > button {
     border-color: #d8dfdc;
 
     background: #fff;
@@ -1707,7 +1707,7 @@ p {
 }
 
 
-.address-card .address-actions > button:hover {
+.addr-card .addr-actions > button:hover {
     border-color: #9eb7ae;
 
     background: #f1f5f3;
@@ -1716,7 +1716,7 @@ p {
 }
 
 
-.address-card .address-actions > button.btn-remove {
+.addr-card .addr-actions > button.btn-remove {
     border-color: var(--coral);
 
     background: var(--coral);
@@ -1725,7 +1725,7 @@ p {
 }
 
 
-.address-card .address-actions > button.btn-remove:hover {
+.addr-card .addr-actions > button.btn-remove:hover {
     border-color: var(--coral-dark);
 
     background: var(--coral-dark);
@@ -1790,7 +1790,7 @@ p {
 
 /* Address form */
 
-.address-form {
+.addr-form {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -1813,17 +1813,17 @@ p {
 }
 
 
-.address-form .address-field {
+.addr-form .addr-field {
     margin: 0;
 }
 
 
-.address-form .address-field-wide {
+.addr-form .addr-wide {
     grid-column: 1 / -1;
 }
 
 
-.address-form label {
+.addr-form label {
     display: block;
 
     margin-bottom: 7px;
@@ -1836,7 +1836,7 @@ p {
 }
 
 
-.address-form input[type="text"] {
+.addr-form input[type="text"] {
     width: 100%;
 
     max-width: none;
@@ -1857,7 +1857,7 @@ p {
 }
 
 
-.address-form input[type="text"]:focus {
+.addr-form input[type="text"]:focus {
     outline: none;
 
     border-color: var(--teal);
@@ -1867,7 +1867,7 @@ p {
 }
 
 
-.address-default {
+.addr-default {
     grid-column: 1 / -1;
 
     margin: 0;
@@ -1876,7 +1876,7 @@ p {
 }
 
 
-.address-default label {
+.addr-default label {
     display: flex;
 
     align-items: center;
@@ -1889,7 +1889,7 @@ p {
 }
 
 
-.address-default input {
+.addr-default input {
     width: 17px;
     height: 17px;
 
@@ -1897,7 +1897,7 @@ p {
 }
 
 
-.address-submit {
+.addr-submit {
     grid-column: 1 / -1;
 
     min-height: 46px;
@@ -1922,7 +1922,7 @@ p {
 }
 
 
-.address-submit:hover {
+.addr-submit:hover {
     background: var(--coral-dark);
 
     transform:
@@ -1930,7 +1930,7 @@ p {
 }
 
 
-.address-back {
+.addr-back {
     display: block;
 
     width: fit-content;
@@ -2008,14 +2008,14 @@ form select:focus {
    18. AUTHENTICATION
    ========================================================= */
 
-.auth-page {
+.auth {
     min-height: 100vh;
 
     background: var(--paper);
 }
 
 
-.auth-shell {
+.auth-wrap {
     display: grid;
 
     grid-template-columns:
@@ -2040,7 +2040,7 @@ form select:focus {
 }
 
 
-.auth-intro {
+.auth-info {
     display: flex;
 
     flex-direction: column;
@@ -2071,8 +2071,8 @@ form select:focus {
 }
 
 
-.auth-kicker,
-.auth-panel-kicker {
+.auth-tag,
+.auth-box-tag {
     margin: 0 0 14px;
 
     color: var(--gold);
@@ -2085,7 +2085,7 @@ form select:focus {
 }
 
 
-.auth-intro h1 {
+.auth-info h1 {
     max-width: 390px;
 
     margin: 0 0 18px;
@@ -2097,7 +2097,7 @@ form select:focus {
 }
 
 
-.auth-intro p:last-child {
+.auth-info p:last-child {
     max-width: 390px;
 
     margin: 0;
@@ -2106,7 +2106,7 @@ form select:focus {
 }
 
 
-.auth-panel {
+.auth-box {
     align-self: center;
 
     width: min(100%, 480px);
@@ -2117,21 +2117,21 @@ form select:focus {
 }
 
 
-.auth-panel h2 {
+.auth-box h2 {
     margin: 0 0 8px;
 
     font-size: 38px;
 }
 
 
-.auth-subtitle {
+.auth-sub {
     margin: 0 0 30px;
 
     color: var(--muted);
 }
 
 
-.auth-message {
+.msg {
     margin: 0 0 22px;
 
     padding: 12px 14px;
@@ -2277,52 +2277,52 @@ form select:focus {
    19. FOOTER
    ========================================================= */
 
-.site-footer {
+.footer {
     padding: 52px 24px 22px;
 
     color: #e8eeeb;
 
     background: var(--ink);
 }
-.footer-inner,
-.footer-bottom {
+.foot-wrap,
+.foot-bottom {
     width: min(
         var(--container-width),
         100%
     );
     margin: 0 auto;
 }
-.footer-inner {
+.foot-wrap {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 48px;
     padding-bottom: 38px;
 }
-.footer-brand h2 {
+.foot-brand h2 {
     max-width: 410px;
     margin: 6px 0 12px;
     color: #fff;
     font-size: 30px;
 }
-.footer-brand p:not(.footer-kicker),
-.footer-column p {
+.foot-brand p:not(.foot-tag),
+.foot-col p {
     max-width: 390px;
     margin: 0;
     color: #aebdb9;
 }
-.footer-kicker {
+.foot-tag {
     margin: 0;
     color: var(--gold);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .16em;
 }
-.footer-column h3 {
+.foot-col h3 {
     margin: 5px 0 14px;
     color: #fff;
     font-size: 19px;
 }
-.footer-column a {
+.foot-col a {
     display: block;
     margin: 8px 0;
     color: #c9d6d2;
@@ -2330,10 +2330,10 @@ form select:focus {
     transition:
         color .2s ease;
 }
-.footer-column a:hover {
+.foot-col a:hover {
     color: var(--gold);
 }
-.footer-bottom {
+.foot-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2346,7 +2346,7 @@ form select:focus {
 /* =========================================================
    20. EMPTY PRODUCTS
    ========================================================= */
-.empty-products {
+.empty {
     padding: 50px 24px;
     border: 1px dashed #c8d1cb;
     border-radius: var(--radius);
@@ -2364,21 +2364,21 @@ form select:focus {
             calc(100% - 32px)
         );
     }
-    .navbar {
+    .nav {
         padding-left: 18px;
         padding-right: 18px;
     }
-    .navbar-links {
+    .nav-links {
         gap: 12px;
     }
-    .product-grid {
+    .products {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 20px;
     }
-    .filter-bar {
+    .filters {
         grid-template-columns: 1fr 1.5fr 150px 70px;
     }
-    .hero-banner-art {
+    .hero-art {
         transform: scale(.9);
         transform-origin: right center;
     }
@@ -2387,46 +2387,46 @@ form select:focus {
    22. TABLET / SMALL
    ========================================================= */
 @media (max-width: 800px) {
-    .navbar {
+    .nav {
         align-items: flex-start;
         flex-direction: column;
         padding-top: 14px;
         padding-bottom: 16px;
     }
-    .navbar-links {
+    .nav-links {
         width: 100%;
         justify-content: flex-start;
         gap: 9px 16px;
     }
-    .hero-banner-content {
+    .hero-wrap {
         flex-direction: column;
         text-align: center;
         padding: 55px 0 40px;
     }
-    .hero-banner-text {
+    .hero-copy {
         width: 100%;
         padding-left: 0;
     }
-    .hero-description {
+    .hero-desc {
         margin-right: auto;
         margin-left: auto;
     }
-    .hero-banner-art {
+    .hero-art {
         width: 100%;
         max-width: 540px;
         min-height: 260px;
         transform: none;
     }
-    .art-frame-1 {
+    .frame-1 {
         right: 48%;
     }
-    .art-frame-2 {
+    .frame-2 {
         right: 25%;
     }
-    .art-frame-3 {
+    .frame-3 {
         right: 3%;
     }
-    .product-grid {
+    .products {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
@@ -2438,34 +2438,34 @@ form select:focus {
     .address-add-button {
         margin-top: 4px;
     }
-    .address-form {
+    .addr-form {
         grid-template-columns: 1fr;
         padding: 22px;
     }
-    .address-form .address-field-wide,
-    .address-default,
-    .address-submit {
+    .addr-form .addr-wide,
+    .addr-default,
+    .addr-submit {
         grid-column: auto;
     }
-    .footer-inner {
+    .foot-wrap {
         grid-template-columns: 1fr;
         gap: 28px;
     }
-    .footer-bottom {
+    .foot-bottom {
         flex-direction: column;
         align-items: flex-start;
     }
-    .auth-shell {
+    .auth-wrap {
         width: min( 680px, calc(100% - 28px) );
         grid-template-columns: 1fr;
         min-height: 0;
         margin: 25px auto;
     }
-    .auth-intro {
+    .auth-info {
         min-height: 300px;
         padding: 32px;
     }
-    .auth-panel {
+    .auth-box {
         width: 100%;
         max-width: 540px;
         padding: 40px 28px;
@@ -2483,99 +2483,99 @@ form select:focus {
         padding-top: 35px;
         padding-bottom: 50px;
     }
-    .navbar-brand {
+    .nav-brand {
         font-size: 19px;
     }
-    .brand-logo {
+    .logo {
         width: 44px;
         height: 44px;
     }
-    .navbar-links {
+    .nav-links {
         gap: 8px 13px;
     }
-    .navbar-links a,
-    .navbar-user {
+    .nav-links a,
+    .nav-user {
         font-size: 13px;
     }
     /* Hero */
-    .hero-banner {
+    .hero {
         margin-bottom: 45px;
     }
-    .hero-banner-content {
+    .hero-wrap {
         width: calc(100% - 28px);
         min-height: auto;
         padding: 42px 0 25px;
     }
-    .hero-banner-text h2 {
+    .hero-copy h2 {
         font-size: 38px;
     }
-    .hero-description {
+    .hero-desc {
         font-size: 14px;
     }
-    .hero-banner-art {
+    .hero-art {
         min-height: 210px;
     }
-    .art-frame-1 {
+    .frame-1 {
         top: 35px;
         right: 52%;
         width: 110px;
         height: 145px;
     }
-    .art-frame-2 {
+    .frame-2 {
         top: 10px;
         right: 25%;
         width: 140px;
         height: 175px;
     }
-    .art-frame-3 {
+    .frame-3 {
         top: 55px;
         right: 0;
         width: 95px;
         height: 125px;
     }
     /* Heading */
-    .painting-heading {
+    .paint-head {
         margin-bottom: 25px;
     }
-    .painting-heading h1 {
+    .paint-head h1 {
         font-size: 38px;
     }
     /* Filter */
-    .filter-bar {
+    .filters {
         grid-template-columns: 1fr;
         gap: 10px;
         padding: 14px;
         margin-bottom: 25px;
         border-radius: 10px;
     }
-    .filter-bar input {
+    .filters input {
         grid-column: auto;
     }
-    .filter-bar input,
-    .filter-bar select,
-    .filter-bar button {
+    .filters input,
+    .filters select,
+    .filters button {
         height: 46px;
     }
     /* Products */
-    .product-grid {
+    .products {
         grid-template-columns: 1fr;
         gap: 18px;
     }
-    .product-image {
+    .prod-img {
         height: 250px;
     }
-    .product-info {
+    .prod-info {
         padding: 16px;
     }
     /* Product detail */
-    .product-detail {
+    .detail {
         padding: 18px;
         gap: 22px;
     }
-    .product-detail-image {
+    .detail-img {
         width: 100%;
     }
-    .product-detail-info {
+    .detail-info {
         min-width: 100%;
     }
     /* Cart */
@@ -2584,7 +2584,7 @@ form select:focus {
         overflow-x: auto;
         white-space: nowrap;
     }
-    .cart-product {
+    .cart-prod {
         min-width: 220px;
     }
     .cart-total {
@@ -2594,10 +2594,10 @@ form select:focus {
         font-size: 20px;
     }
     /* Address */
-    .address-card {
+    .addr-card {
         padding: 20px 18px 18px;
     }
-    .address-card-topline {
+    .addr-top {
         gap: 10px;
     }
     .address-recipient {
@@ -2609,39 +2609,39 @@ form select:focus {
     .address-location {
         margin-left: 0;
     }
-    .address-actions {
+    .addr-actions {
         flex-wrap: wrap;
     }
-    .address-card .address-actions > a,
-    .address-card .address-actions > button {
+    .addr-card .addr-actions > a,
+    .addr-card .addr-actions > button {
         flex: 1;
     }
     .badge-default {
         font-size: 11px;
     }
     /* Auth */
-    .auth-shell {
+    .auth-wrap {
         width: calc(100% - 20px);
         margin: 15px auto;
     }
-    .auth-intro {
+    .auth-info {
         min-height: 260px;
         padding: 25px;
     }
-    .auth-intro h1 {
+    .auth-info h1 {
         font-size: 36px;
     }
-    .auth-panel {
+    .auth-box {
         padding: 32px 20px;
     }
-    .auth-panel h2 {
+    .auth-box h2 {
         font-size: 32px;
     }
     /* Footer */
-    .site-footer {
+    .footer {
         padding: 40px 18px 20px;
     }
-    .footer-brand h2 {
+    .foot-brand h2 {
         font-size: 26px;
     }
 }
