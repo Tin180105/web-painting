@@ -38,38 +38,39 @@ class CategoryController extends Controller
     }
 
     // POST /admin/categories/create - xử lý thêm category
-    public function store()
-    {
-        requireAdmin();
+    // POST /admin/categories/create - xử lý thêm category
+public function store()
+{
+    requireAdmin();
 
-        $categoryName = trim($_POST["category_name"] ?? "");
-        $description = trim($_POST["description"] ?? "");
-        $image = trim($_POST["image"] ?? "");
+    $categoryName = trim($_POST["category_name"] ?? "");
+    $description = trim($_POST["description"] ?? "");
 
-        if ($categoryName === "") {
+    if ($categoryName === "") {
+        $this->render("admin/categories/create", [
+            "message" => "Tên danh mục không được để trống",
+            "activeMenu" => "categories",
+            "pageTitle" => "Thêm danh mục"
+        ]);
+        return;
+    }
+
+    foreach ($this->categoryModel->getAll() as $item) {
+        if (strtolower($item["category_name"]) === strtolower($categoryName)) {
             $this->render("admin/categories/create", [
-                "message" => "Tên danh mục không được để trống",
+                "message" => "Tên danh mục đã tồn tại",
                 "activeMenu" => "categories",
                 "pageTitle" => "Thêm danh mục"
             ]);
             return;
         }
-
-        foreach ($this->categoryModel->getAll() as $item) {
-            if (strtolower($item["category_name"]) === strtolower($categoryName)) {
-                $this->render("admin/categories/create", [
-                    "message" => "Tên danh mục đã tồn tại",
-                    "activeMenu" => "categories",
-                    "pageTitle" => "Thêm danh mục"
-                ]);
-                return;
-            }
-        }
-
-        $this->categoryModel->create($categoryName, $description, $image);
-
-        $this->redirect("/admin/categories");
     }
+
+    $this->categoryModel->create($categoryName, $description);
+
+    $this->redirect("/admin/categories");
+}
+
 
     // GET /admin/categories/edit/{id} - hiển thị form sửa
     public function edit($id)
@@ -90,35 +91,34 @@ class CategoryController extends Controller
         ]);
     }
 
-    // POST /admin/categories/edit/{id} - xử lý cập nhật
-    public function update($id)
-    {
-        requireAdmin();
+// POST /admin/categories/edit/{id} - xử lý cập nhật
+public function update($id)
+{
+    requireAdmin();
 
-        $categoryName = trim($_POST["category_name"] ?? "");
-        $description = trim($_POST["description"] ?? "");
-        $image = trim($_POST["image"] ?? "");
+    $categoryName = trim($_POST["category_name"] ?? "");
+    $description = trim($_POST["description"] ?? "");
 
-        $category = $this->categoryModel->getById($id);
+    $category = $this->categoryModel->getById($id);
 
-        if (!$category) {
-            die("Không tìm thấy danh mục");
-        }
-
-        if ($categoryName === "") {
-            $this->render("admin/categories/edit", [
-                "category" => $category,
-                "message" => "Tên danh mục không được để trống",
-                "activeMenu" => "categories",
-                "pageTitle" => "Sửa danh mục"
-            ]);
-            return;
-        }
-
-        $this->categoryModel->update($id, $categoryName, $description, $image);
-
-        $this->redirect("/admin/categories");
+    if (!$category) {
+        die("Không tìm thấy danh mục");
     }
+
+    if ($categoryName === "") {
+        $this->render("admin/categories/edit", [
+            "category" => $category,
+            "message" => "Tên danh mục không được để trống",
+            "activeMenu" => "categories",
+            "pageTitle" => "Sửa danh mục"
+        ]);
+        return;
+    }
+
+    $this->categoryModel->update($id, $categoryName, $description);
+
+    $this->redirect("/admin/categories");
+}
 
     // GET /admin/categories/delete/{id} - xử lý xóa
     public function delete($id)

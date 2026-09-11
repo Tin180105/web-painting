@@ -47,7 +47,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                     <th>Thao tác</th>
                 </tr>
 
-                                <?php foreach ($paintings as $painting): [$statusLabel, $statusClass] = paintingStatusMeta($painting["status"]); ?>
+                    <?php foreach ($paintings as $painting): [$statusLabel, $statusClass] = paintingStatusMeta($painting["status"]); ?>
                     <tr>
                         <td>
                             <img
@@ -62,7 +62,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                         <td><?= (int) $painting["quantity"] ?></td>
                         <td><span class="status-badge <?= $statusClass ?>"><?= $statusLabel ?></span></td>
                         <td>
-                            
+                            <a
                                 href="<?= BASE_URL ?>/admin/paintings/edit/<?= $painting["painting_id"] ?>"
                                 class="admin-table-link"
                                 data-modal-form
@@ -70,8 +70,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                             >
                                 Sửa
                             </a>
-                            |
-                            
+                            <a
                                 href="<?= BASE_URL ?>/admin/paintings/delete/<?= $painting["painting_id"] ?>"
                                 class="admin-table-link"
                                 data-modal-delete

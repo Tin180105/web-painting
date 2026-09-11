@@ -38,41 +38,38 @@ class Category
         return $stmt->fetch();
     }
 
-    // Thêm category
-    public function create($categoryName, $description, $image)
-    {
-        $sql = "INSERT INTO categories
-                (category_name, description, image)
-                VALUES
-                (:category_name, :description, :image)";
+// Thêm category
+public function create($categoryName, $description)
+{
+    $sql = "INSERT INTO categories
+            (category_name, description)
+            VALUES
+            (:category_name, :description)";
 
-        $stmt = $this->conn->prepare($sql);
+    $stmt = $this->conn->prepare($sql);
 
-        return $stmt->execute([
-            ":category_name" => $categoryName,
-            ":description" => $description,
-            ":image" => $image
-        ]);
-    }
+    return $stmt->execute([
+        ":category_name" => $categoryName,
+        ":description" => $description
+    ]);
+}
 
-    // Sửa category
-    public function update($id, $categoryName, $description, $image)
-    {
-        $sql = "UPDATE categories
-                SET category_name = :category_name,
-                    description = :description,
-                    image = :image
-                WHERE category_id = :id";
+// Sửa category
+public function update($id, $categoryName, $description)
+{
+    $sql = "UPDATE categories
+            SET category_name = :category_name,
+                description = :description
+            WHERE category_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+    $stmt = $this->conn->prepare($sql);
 
-        return $stmt->execute([
-            ":id" => $id,
-            ":category_name" => $categoryName,
-            ":description" => $description,
-            ":image" => $image
-        ]);
-    }
+    return $stmt->execute([
+        ":id" => $id,
+        ":category_name" => $categoryName,
+        ":description" => $description
+    ]);
+}
 
     // Xóa category
     public function delete($id)

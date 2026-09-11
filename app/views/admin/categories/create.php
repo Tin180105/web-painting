@@ -22,11 +22,6 @@
                     <textarea name="description"></textarea>
                 </div>
 
-                <div class="form-field">
-                    <label>Hình ảnh</label>
-                    <input type="text" name="image" placeholder="Đường dẫn hình ảnh">
-                </div>
-
                 <div class="admin-form-actions">
                     <button type="submit" class="admin-form-submit">Thêm danh mục</button>
                     <a href="<?= BASE_URL ?>/admin/categories" class="admin-form-back">Hủy, quay lại</a>

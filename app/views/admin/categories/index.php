@@ -24,7 +24,6 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                 <th>ID</th>
                 <th>Tên danh mục</th>
                 <th>Mô tả</th>
-                <th>Hình ảnh</th>
                 <th>Ngày tạo</th>
                 <th>Thao tác</th>
             </tr>
@@ -34,13 +33,9 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                     <td><?= $category["category_id"] ?></td>
                     <td><?= htmlspecialchars($category["category_name"]) ?></td>
                     <td><?= htmlspecialchars($category["description"] ?? "") ?></td>
+                    <td><?= date("d/m/Y", strtotime($category["created_at"])) ?></td>
                     <td>
-                        <?php if (!empty($category["image"])): ?>
-                            <img src="<?= htmlspecialchars($category["image"]) ?>" width="80">
-                        <?php endif; ?>
-                    </td>
-                                        <td>
-                        
+                        <a
                             href="<?= BASE_URL ?>/admin/categories/edit/<?= $category["category_id"] ?>"
                             class="admin-table-link"
                             data-modal-form
@@ -49,7 +44,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                             Sửa
                         </a>
                         |
-                        
+                        <a
                             href="<?= BASE_URL ?>/admin/categories/delete/<?= $category["category_id"] ?>"
                             class="admin-table-link"
                             data-modal-delete

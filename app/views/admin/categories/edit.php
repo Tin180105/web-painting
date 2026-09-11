@@ -33,22 +33,6 @@ require __DIR__ . "/../../layouts/admin_header.php";
                     <textarea name="description"><?= htmlspecialchars($category["description"] ?? "") ?></textarea>
                 </div>
 
-                <div class="form-field">
-                    <label>Hình ảnh</label>
-                    <input
-                        type="text"
-                        name="image"
-                        value="<?= htmlspecialchars($category["image"] ?? "") ?>"
-                        placeholder="Đường dẫn hình ảnh"
-                    >
-
-                    <?php if (!empty($category["image"])): ?>
-                        <div class="admin-form-preview">
-                            <img src="<?= htmlspecialchars($category["image"]) ?>" alt="Xem trước hình ảnh">
-                        </div>
-                    <?php endif; ?>
-                </div>
-
                 <div class="admin-form-actions">
                     <button type="submit" class="admin-form-submit">Cập nhật</button>
                     <a href="<?= BASE_URL ?>/admin/categories" class="admin-form-back">Hủy, quay lại</a>

@@ -74,7 +74,7 @@ require __DIR__ . "/../../layouts/admin_header.php";
                                 <?php if ((int) $user["user_id"] !== (int) $_SESSION["user_id"]): ?>
                                     |
                                     <?php if ($user["status"] === "locked"): ?>
-                                        
+                                        <a
                                             href="<?= BASE_URL ?>/admin/users/unlock/<?= $user["user_id"] ?>"
                                             class="admin-table-link"
                                             data-confirm-action
@@ -84,7 +84,7 @@ require __DIR__ . "/../../layouts/admin_header.php";
                                             Mở khóa
                                         </a>
                                     <?php else: ?>
-                                        
+                                        <a
                                             href="<?= BASE_URL ?>/admin/users/lock/<?= $user["user_id"] ?>"
                                             class="admin-table-link"
                                             data-confirm-action
