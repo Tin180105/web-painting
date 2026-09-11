@@ -13,7 +13,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
     <div class="admin-form-card">
 
-        <form action="<?= BASE_URL ?>/admin/paintings/edit/<?= $painting["painting_id"] ?>" method="POST">
+        <form action="<?= BASE_URL ?>/admin/paintings/edit/<?= $painting["painting_id"] ?>" method="POST" enctype="multipart/form-data">
 
             <div class="form-field">
                 <label>Danh mục</label>
@@ -72,11 +72,14 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
             <div class="form-field">
                 <label>Hình ảnh</label>
-                <input type="text" name="image" value="<?= htmlspecialchars($painting["image"] ?? "") ?>" placeholder="Đường dẫn hình ảnh">
+                <input type="file" name="image" accept="image/*">
+                <p style="margin-top:6px;color:var(--muted);font-size:13px">
+                    Để trống nếu muốn giữ nguyên ảnh hiện tại.
+                </p>
 
                 <?php if (!empty($painting["image"])): ?>
                     <div class="admin-form-preview">
-                        <img src="<?= htmlspecialchars($painting["image"]) ?>" alt="Xem trước hình ảnh">
+                        <img src="<?= htmlspecialchars($painting["image"]) ?>" alt="Ảnh hiện tại">
                     </div>
                 <?php endif; ?>
             </div>
