@@ -5,7 +5,7 @@ if (!isset($message)) { $message = ""; }
 require __DIR__ . "/../../layouts/admin_header.php"; ?>
 
     <h1>Thêm sản phẩm</h1>
-
+    <div class="admin-modal-source">
     <?php if (!empty($message)): ?>
         <p class="address-message"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
@@ -88,5 +88,5 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
         </form>
 
     </div>
-
+    </div>
 <?php require __DIR__ . "/../../layouts/admin_footer.php"; ?>

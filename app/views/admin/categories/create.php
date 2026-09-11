@@ -2,35 +2,39 @@
 
     <h1>Thêm danh mục</h1>
 
-    <?php if (!empty($message)): ?>
-        <p class="address-message"><?= htmlspecialchars($message) ?></p>
-    <?php endif; ?>
+    <div class="admin-modal-source">
 
-    <div class="admin-form-card">
+        <?php if (!empty($message)): ?>
+            <p class="admin-message-error"><?= htmlspecialchars($message) ?></p>
+        <?php endif; ?>
 
-        <form action="<?= BASE_URL ?>/admin/categories/create" method="POST">
+        <div class="admin-form-card">
 
-            <div class="form-field">
-                <label>Tên danh mục</label>
-                <input type="text" name="category_name" required>
-            </div>
+            <form action="<?= BASE_URL ?>/admin/categories/create" method="POST">
 
-            <div class="form-field">
-                <label>Mô tả</label>
-                <textarea name="description"></textarea>
-            </div>
+                <div class="form-field">
+                    <label>Tên danh mục</label>
+                    <input type="text" name="category_name" required>
+                </div>
 
-            <div class="form-field">
-                <label>Hình ảnh</label>
-                <input type="text" name="image" placeholder="Đường dẫn hình ảnh">
-            </div>
+                <div class="form-field">
+                    <label>Mô tả</label>
+                    <textarea name="description"></textarea>
+                </div>
 
-            <div class="admin-form-actions">
-                <button type="submit" class="admin-form-submit">Thêm danh mục</button>
-                <a href="<?= BASE_URL ?>/admin/categories" class="admin-form-back">Hủy, quay lại</a>
-            </div>
+                <div class="form-field">
+                    <label>Hình ảnh</label>
+                    <input type="text" name="image" placeholder="Đường dẫn hình ảnh">
+                </div>
 
-        </form>
+                <div class="admin-form-actions">
+                    <button type="submit" class="admin-form-submit">Thêm danh mục</button>
+                    <a href="<?= BASE_URL ?>/admin/categories" class="admin-form-back">Hủy, quay lại</a>
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
 
