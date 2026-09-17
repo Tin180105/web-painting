@@ -19,7 +19,7 @@ require __DIR__ . "/../../layouts/admin_header.php";
         <div class="admin-panel-head">
             <h2>Danh sách tài khoản</h2>
 
-            <form method="GET" action="<?= BASE_URL ?>/admin/users" class="admin-chart-filter">
+            <form method="GET" action="<?= BASE_URL ?>/admin/users" class="admin-chart-filter" style="display:flex;align-items:center;gap:8px">
                 <input
                     type="text"
                     name="keyword"
