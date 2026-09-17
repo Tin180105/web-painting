@@ -34,7 +34,7 @@ require __DIR__ . "/../../layouts/admin_header.php";
             <hr style="border:none;border-top:1px solid var(--line);margin:18px 0">
 
             <?php if ($user["status"] === "locked"): ?>
-                
+                <a
                     href="<?= BASE_URL ?>/admin/users/unlock/<?= $user["user_id"] ?>"
                     class="admin-form-submit"
                     style="display:inline-block;text-decoration:none"
@@ -45,7 +45,7 @@ require __DIR__ . "/../../layouts/admin_header.php";
                     Mở khóa tài khoản
                 </a>
             <?php else: ?>
-                
+                <a
                     href="<?= BASE_URL ?>/admin/users/lock/<?= $user["user_id"] ?>"
                     class="admin-form-submit"
                     style="display:inline-block;text-decoration:none"
