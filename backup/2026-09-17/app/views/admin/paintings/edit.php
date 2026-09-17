@@ -1,7 +1,6 @@
 <?php
 if (!isset($painting)) { $painting = []; }
 if (!isset($categories)) { $categories = []; }
-if (!isset($galleryImages)) { $galleryImages = []; }
 if (!isset($message)) { $message = ""; }
 
 require __DIR__ . "/../../layouts/admin_header.php"; ?>
@@ -72,37 +71,17 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
             </div>
 
             <div class="form-field">
-                <label>Thư viện ảnh</label>
-
-                <?php if (!empty($galleryImages)): ?>
-                    <div class="admin-gallery-grid">
-                        <?php foreach ($galleryImages as $img): ?>
-                            <label class="admin-gallery-item">
-                                <img
-                                    src="<?= htmlspecialchars($img["image_path"]) ?>"
-                                    alt="Ảnh sản phẩm"
-                                    class="<?= $img["image_path"] === ($painting["image"] ?? "") ? "is-cover" : "" ?>"
-                                    onerror="this.onerror=null;this.src='https://via.placeholder.com/100?text=Loi';"
-                                >
-                                <?php if ($img["image_path"] === ($painting["image"] ?? "")): ?>
-                                    <span class="admin-gallery-cover-badge">Ảnh đại diện</span>
-                                <?php endif; ?>
-                                <span class="admin-gallery-delete">
-                                    <input type="checkbox" name="delete_images[]" value="<?= $img["image_id"] ?>">
-                                    Xóa
-                                </span>
-                            </label>
-                        <?php endforeach; ?>
-                    </div>
-                <?php else: ?>
-                    <p style="color:var(--muted);font-size:13px">Chưa có ảnh nào.</p>
-                <?php endif; ?>
-
-                <p style="margin-top:10px;margin-bottom:6px">Thêm ảnh mới (có thể chọn nhiều ảnh)</p>
-                <input type="file" name="images[]" accept="image/*" multiple>
+                <label>Hình ảnh</label>
+                <input type="file" name="image" accept="image/*">
                 <p style="margin-top:6px;color:var(--muted);font-size:13px">
-                    Nếu ảnh đại diện bị xóa, hệ thống sẽ tự chọn ảnh khác trong thư viện (hoặc ảnh mới thêm) làm ảnh đại diện.
+                    Để trống nếu muốn giữ nguyên ảnh hiện tại.
                 </p>
+
+                <?php if (!empty($painting["image"])): ?>
+                    <div class="admin-form-preview">
+                        <img src="<?= htmlspecialchars($painting["image"]) ?>" alt="Ảnh hiện tại">
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="form-field">

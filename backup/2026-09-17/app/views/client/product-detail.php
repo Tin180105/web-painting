@@ -1,36 +1,14 @@
-<?php if (!isset($images)) { $images = []; } ?>
-<?php if (!isset($mainImage)) { $mainImage = $painting["image"] ?? ""; } ?>
 <?php require __DIR__ . "/../layouts/header.php"; ?>
 
     <a href="<?= BASE_URL ?>/">&larr; Quay lại danh sách</a>
 
     <div class="detail">
 
-        <div class="detail-gallery">
-
-            <img
-                id="detail-main-img"
-                src="<?= htmlspecialchars($mainImage ?: "https://via.placeholder.com/500x400?text=No+Image") ?>"
-                alt="<?= htmlspecialchars($painting["painting_name"]) ?>"
-                class="detail-img"
-                onerror="this.onerror=null;this.src='https://via.placeholder.com/500x400?text=No+Image';"
-            >
-
-            <?php if (count($images) > 1): ?>
-                <div class="detail-thumbs">
-                    <?php foreach ($images as $index => $imagePath): ?>
-                        <img
-                            src="<?= htmlspecialchars($imagePath) ?>"
-                            alt="<?= htmlspecialchars($painting["painting_name"]) ?> - ảnh <?= $index + 1 ?>"
-                            class="detail-thumb <?= $imagePath === $mainImage ? "active" : "" ?>"
-                            data-detail-thumb
-                            onerror="this.style.display='none';"
-                        >
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-        </div>
+        <img
+            src="<?= htmlspecialchars($painting["image"] ?: "https://via.placeholder.com/500x400?text=No+Image") ?>"
+            alt="<?= htmlspecialchars($painting["painting_name"]) ?>"
+            class="detail-img"
+        >
 
         <div class="detail-info">
 

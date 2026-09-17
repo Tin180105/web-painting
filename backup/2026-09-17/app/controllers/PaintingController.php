@@ -4,21 +4,18 @@ require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/Painting.php";
 require_once __DIR__ . "/../models/Category.php";
 require_once __DIR__ . "/../models/Cart.php";
-require_once __DIR__ . "/../models/PaintingImage.php";
 
 class PaintingController extends Controller
 {
     private $pdo;
     private $paintingModel;
     private $categoryModel;
-    private $paintingImageModel;
 
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
         $this->paintingModel = new Painting($pdo);
         $this->categoryModel = new Category($pdo);
-        $this->paintingImageModel = new PaintingImage($pdo);
     }
 
     // GET / - Trang chủ client: danh sách tranh, lọc theo danh mục/từ khóa/sắp xếp
@@ -56,55 +53,10 @@ class PaintingController extends Controller
             die("Không tìm thấy sản phẩm");
         }
 
-        $gallery = $this->paintingImageModel->getByPaintingId($id);
-
-        // Gộp ảnh đại diện + các ảnh trong thư viện vào 1 mảng duy nhất.
-        // Bỏ qua ảnh bị trùng, ảnh rỗng, và ảnh đã mất file vật lý trên server (dữ liệu cũ/hỏng)
-        $images = [];
-
-        if (!empty($painting["image"]) && !$this->isLocalImageMissing($painting["image"])) {
-            $images[] = $painting["image"];
-        }
-
-        foreach ($gallery as $img) {
-            $path = $img["image_path"];
-
-            if (in_array($path, $images, true)) {
-                continue; // ảnh này đã có trong danh sách rồi
-            }
-
-            if ($this->isLocalImageMissing($path)) {
-                continue; // ảnh đã bị mất file trên server, không hiển thị
-            }
-
-            $images[] = $path;
-        }
-
         $this->render("client/product-detail", [
             "painting" => $painting,
-            "images" => $images,
-            "mainImage" => $images[0] ?? "",
             "cartCount" => $this->getCartCount()
         ]);
-    }
-
-    // Kiểm tra ảnh có phải ảnh local do hệ thống upload nhưng file vật lý đã bị mất không.
-    // Ảnh link ngoài (không thuộc /uploads/paintings/) luôn được coi là hợp lệ, không kiểm tra.
-    private function isLocalImageMissing($path)
-    {
-        if (empty($path)) {
-            return true;
-        }
-
-        $prefix = BASE_URL . "/uploads/paintings/";
-
-        if (strpos($path, $prefix) !== 0) {
-            return false;
-        }
-
-        $fullPath = __DIR__ . "/../../public/uploads/paintings/" . basename($path);
-
-        return !is_file($fullPath);
     }
 
     // Đếm số lượng sản phẩm trong giỏ (hiển thị badge trên navbar), trả 0 nếu chưa đăng nhập

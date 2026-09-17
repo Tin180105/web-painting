@@ -3,19 +3,16 @@
 require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/Painting.php";
 require_once __DIR__ . "/../models/Category.php";
-require_once __DIR__ . "/../models/PaintingImage.php";
 
 class AdminPaintingController extends Controller
 {
     private $paintingModel;
     private $categoryModel;
-    private $paintingImageModel;
 
     public function __construct($pdo)
     {
         $this->paintingModel = new Painting($pdo);
         $this->categoryModel = new Category($pdo);
-        $this->paintingImageModel = new PaintingImage($pdo);
     }
 
     // GET /admin/paintings - danh sách sản phẩm
@@ -61,26 +58,21 @@ class AdminPaintingController extends Controller
             return;
         }
 
-        $uploadedPaths = $this->uploadImages("images");
+        $imageResult = $this->uploadImage("");
 
-        if ($uploadedPaths === false) {
+        if ($imageResult === false) {
             $this->render("admin/paintings/create", [
                 "categories" => $this->categoryModel->getAll(),
-                "message" => "Ảnh không hợp lệ (chỉ nhận jpg, png, gif, webp, dung lượng dưới 2MB mỗi ảnh)",
+                "message" => "Ảnh không hợp lệ (chỉ nhận jpg, png, gif, webp, dung lượng dưới 2MB)",
                 "activeMenu" => "paintings",
                 "pageTitle" => "Thêm sản phẩm"
             ]);
             return;
         }
 
-        // Ảnh đầu tiên được chọn làm ảnh đại diện, tất cả ảnh được lưu vào thư viện ảnh
-        $data["image"] = $uploadedPaths[0] ?? "";
+        $data["image"] = $imageResult;
 
-        $paintingId = $this->paintingModel->create($data);
-
-        if (!empty($uploadedPaths)) {
-            $this->paintingImageModel->addImages($paintingId, $uploadedPaths);
-        }
+        $this->paintingModel->create($data);
 
         $this->redirect("/admin/paintings?message=" . urlencode("Thêm sản phẩm thành công"));
     }
@@ -99,7 +91,6 @@ class AdminPaintingController extends Controller
         $this->render("admin/paintings/edit", [
             "painting" => $painting,
             "categories" => $this->categoryModel->getAll(),
-            "galleryImages" => $this->paintingImageModel->getByPaintingId($id),
             "message" => "",
             "activeMenu" => "paintings",
             "pageTitle" => "Sửa sản phẩm"
@@ -123,7 +114,6 @@ class AdminPaintingController extends Controller
             $this->render("admin/paintings/edit", [
                 "painting" => array_merge($painting, $_POST),
                 "categories" => $this->categoryModel->getAll(),
-                "galleryImages" => $this->paintingImageModel->getByPaintingId($id),
                 "message" => "Vui lòng nhập đầy đủ thông tin bắt buộc (danh mục, tên tranh, giá)",
                 "activeMenu" => "paintings",
                 "pageTitle" => "Sửa sản phẩm"
@@ -131,67 +121,20 @@ class AdminPaintingController extends Controller
             return;
         }
 
-        $uploadedPaths = $this->uploadImages("images");
+        $imageResult = $this->uploadImage($painting["image"] ?? "");
 
-        if ($uploadedPaths === false) {
+        if ($imageResult === false) {
             $this->render("admin/paintings/edit", [
                 "painting" => array_merge($painting, $_POST),
                 "categories" => $this->categoryModel->getAll(),
-                "galleryImages" => $this->paintingImageModel->getByPaintingId($id),
-                "message" => "Ảnh không hợp lệ (chỉ nhận jpg, png, gif, webp, dung lượng dưới 2MB mỗi ảnh)",
+                "message" => "Ảnh không hợp lệ (chỉ nhận jpg, png, gif, webp, dung lượng dưới 2MB)",
                 "activeMenu" => "paintings",
                 "pageTitle" => "Sửa sản phẩm"
             ]);
             return;
         }
 
-        // Lấy danh sách ID ảnh được đánh dấu xóa (checkbox "Xóa" trong thư viện ảnh)
-        $deleteIds = [];
-
-        if (!empty($_POST["delete_images"])) {
-            foreach ($_POST["delete_images"] as $value) {
-                $imageId = (int) $value;
-
-                if ($imageId > 0) {
-                    $deleteIds[] = $imageId;
-                }
-            }
-        }
-
-        $currentImage = $painting["image"] ?? "";
-
-        foreach ($deleteIds as $imageId) {
-            $image = $this->paintingImageModel->getById($imageId);
-
-            if (!$image || (int) $image["painting_id"] !== (int) $id) {
-                continue;
-            }
-
-            $this->deleteUploadedImageIfLocal($image["image_path"]);
-            $this->paintingImageModel->deleteById($imageId);
-
-            if ($image["image_path"] === $currentImage) {
-                $currentImage = "";
-            }
-        }
-
-        // Thêm ảnh mới upload vào thư viện ảnh
-        if (!empty($uploadedPaths)) {
-            $this->paintingImageModel->addImages($id, $uploadedPaths);
-
-            // Nếu ảnh đại diện vừa bị xóa (hoặc chưa từng có), lấy ảnh mới đầu tiên làm ảnh đại diện
-            if ($currentImage === "") {
-                $currentImage = $uploadedPaths[0];
-            }
-        }
-
-        // Ảnh đại diện vừa bị xóa và không có ảnh mới -> lấy ảnh còn lại đầu tiên trong thư viện (nếu có)
-        if ($currentImage === "") {
-            $remaining = $this->paintingImageModel->getByPaintingId($id);
-            $currentImage = $remaining[0]["image_path"] ?? "";
-        }
-
-        $data["image"] = $currentImage;
+        $data["image"] = $imageResult;
 
         $this->paintingModel->update($id, $data);
 
@@ -212,16 +155,9 @@ class AdminPaintingController extends Controller
                 return;
             }
 
-            // Xóa file vật lý của tất cả ảnh trong thư viện ảnh trước khi xóa sản phẩm
-            // (dữ liệu bảng painting_images tự xóa theo do FOREIGN KEY ON DELETE CASCADE)
-            $galleryImages = $this->paintingImageModel->getByPaintingId($id);
-            foreach ($galleryImages as $image) {
-                $this->deleteUploadedImageIfLocal($image["image_path"]);
-            }
-
             $this->paintingModel->delete($id);
 
-            // Xóa luôn file ảnh đại diện trên server nếu là ảnh được upload trong hệ thống
+            // Xóa luôn file ảnh trên server nếu là ảnh được upload trong hệ thống
             $this->deleteUploadedImageIfLocal($painting["image"] ?? "");
 
             $this->redirect("/admin/paintings?message=" . urlencode("Xóa sản phẩm thành công"));
@@ -265,43 +201,40 @@ class AdminPaintingController extends Controller
     }
 
     /**
-     * Xử lý nhiều ảnh upload cùng lúc từ $_FILES[$fieldName] (input dạng name="images[]" multiple).
-     * - Không chọn ảnh nào -> trả về mảng rỗng (không phải lỗi, cho phép để trống).
-     * - Upload thành công -> trả về mảng đường dẫn (BASE_URL + /uploads/paintings/xxx.jpg).
-     * - Có ảnh không hợp lệ (sai định dạng / quá dung lượng) -> trả về false, không lưu ảnh nào cả.
+     * Xử lý ảnh upload từ $_FILES["image"].
+     * - Nếu người dùng không chọn file mới -> giữ nguyên $currentImage (dùng cho update).
+     * - Nếu upload thành công -> trả về đường dẫn mới (BASE_URL + /uploads/paintings/xxx.jpg).
+     * - Nếu file không hợp lệ (sai định dạng / quá dung lượng) -> trả về false.
      */
-    private function uploadImages($fieldName)
+    private function uploadImage($currentImage = "")
     {
-        if (empty($_FILES[$fieldName]["name"][0])) {
-            return [];
+        // Không có file nào được chọn -> giữ ảnh cũ
+        if (empty($_FILES["image"]["name"])) {
+            return $currentImage;
         }
 
-        $files = $_FILES[$fieldName];
-        $count = count($files["name"]);
+        $file = $_FILES["image"];
+
+        if ($file["error"] !== UPLOAD_ERR_OK) {
+            return false;
+        }
 
         $allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+        $maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (!in_array($file["type"], $allowedTypes, true)) {
+            return false;
+        }
+
+        if ($file["size"] > $maxSize) {
+            return false;
+        }
+
+        $ext = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
         $allowedExt = ["jpg", "jpeg", "png", "gif", "webp"];
-        $maxSize = 2 * 1024 * 1024; // 2MB mỗi ảnh
 
-        // Kiểm tra hợp lệ hết tất cả các ảnh trước, tránh lưu dở dang nếu có ảnh lỗi
-        for ($i = 0; $i < $count; $i++) {
-            if ($files["error"][$i] !== UPLOAD_ERR_OK) {
-                return false;
-            }
-
-            if (!in_array($files["type"][$i], $allowedTypes, true)) {
-                return false;
-            }
-
-            if ($files["size"][$i] > $maxSize) {
-                return false;
-            }
-
-            $ext = strtolower(pathinfo($files["name"][$i], PATHINFO_EXTENSION));
-
-            if (!in_array($ext, $allowedExt, true)) {
-                return false;
-            }
+        if (!in_array($ext, $allowedExt, true)) {
+            return false;
         }
 
         $uploadDir = __DIR__ . "/../../public/uploads/paintings/";
@@ -310,20 +243,16 @@ class AdminPaintingController extends Controller
             mkdir($uploadDir, 0777, true);
         }
 
-        $savedPaths = [];
+        $fileName = uniqid("painting_") . "." . $ext;
 
-        for ($i = 0; $i < $count; $i++) {
-            $ext = strtolower(pathinfo($files["name"][$i], PATHINFO_EXTENSION));
-            $fileName = uniqid("painting_") . "_" . $i . "." . $ext;
-
-            if (!move_uploaded_file($files["tmp_name"][$i], $uploadDir . $fileName)) {
-                return false;
-            }
-
-            $savedPaths[] = BASE_URL . "/uploads/paintings/" . $fileName;
+        if (!move_uploaded_file($file["tmp_name"], $uploadDir . $fileName)) {
+            return false;
         }
 
-        return $savedPaths;
+        // Xóa ảnh cũ (nếu ảnh cũ cũng là ảnh upload trong hệ thống, không đụng tới ảnh link ngoài)
+        $this->deleteUploadedImageIfLocal($currentImage);
+
+        return BASE_URL . "/uploads/paintings/" . $fileName;
     }
 
     // Xóa file ảnh vật lý trên server nếu đường dẫn trỏ vào thư mục uploads/paintings của hệ thống

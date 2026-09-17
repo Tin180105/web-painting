@@ -67,11 +67,8 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
             </div>
 
             <div class="form-field">
-                <label>Hình ảnh (có thể chọn nhiều ảnh)</label>
-                <input type="file" name="images[]" accept="image/*" multiple>
-                <p style="margin-top:6px;color:var(--muted);font-size:13px">
-                    Ảnh đầu tiên được chọn sẽ là ảnh đại diện của sản phẩm.
-                </p>
+                <label>Hình ảnh</label>
+                <input type="file" name="image" accept="image/*">
             </div>
 
             <div class="form-field">

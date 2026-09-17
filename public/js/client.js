@@ -97,6 +97,20 @@ document.querySelectorAll("[data-qty-decrease]").forEach((btn) => {
     });
 });
 
+// ==== Trang chi tiết sản phẩm: chọn ảnh trong thumbnail gallery ====
+
+document.querySelectorAll("[data-detail-thumb]").forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+        const mainImg = document.getElementById("detail-main-img");
+        if (!mainImg) return;
+
+        mainImg.src = thumb.src;
+
+        document.querySelectorAll("[data-detail-thumb]").forEach((t) => t.classList.remove("active"));
+        thumb.classList.add("active");
+    });
+});
+
 // ==== Trang giỏ hàng: đổi số lượng / xóa sản phẩm ====
 
 document.querySelectorAll("[data-cart-row]").forEach((row) => {

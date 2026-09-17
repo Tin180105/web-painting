@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) . " - " : "" ?>Painting Shop</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
+    <?php $styleCssPath = __DIR__ . "/../../../public/css/style.css"; ?>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css?v=<?= is_file($styleCssPath) ? filemtime($styleCssPath) : 1 ?>">
     <script>
         window.BASE_URL = "<?= BASE_URL ?>";
     </script>

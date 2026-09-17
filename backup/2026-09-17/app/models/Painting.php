@@ -87,7 +87,7 @@ class Painting
 
         $stmt = $this->pdo->prepare($sql);
 
-        $stmt->execute([
+        return $stmt->execute([
             ":category_id" => $data["category_id"],
             ":painting_name" => $data["painting_name"],
             ":description" => $data["description"] ?? "",
@@ -100,8 +100,6 @@ class Painting
             ":image" => $data["image"] ?? "",
             ":status" => $data["status"] ?? "available"
         ]);
-
-        return (int) $this->pdo->lastInsertId();
     }
 
     // Sửa tranh (dùng cho phần quản lý sản phẩm - admin)
@@ -136,18 +134,6 @@ class Painting
             ":material" => $data["material"] ?? "",
             ":image" => $data["image"] ?? "",
             ":status" => $data["status"] ?? "available"
-        ]);
-    }
-
-    // Cập nhật riêng ảnh đại diện (dùng khi ảnh đại diện bị xóa khỏi thư viện ảnh, cần đổi sang ảnh khác)
-    public function updateImage($id, $image)
-    {
-        $sql = "UPDATE paintings SET image = :image WHERE painting_id = :id";
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            ":id" => $id,
-            ":image" => $image
         ]);
     }
 

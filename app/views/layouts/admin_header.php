@@ -8,8 +8,12 @@ if (!isset($activeMenu)) { $activeMenu = ""; }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle) ?> - Admin | Painting Shop</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/admin.css">
+    <?php
+    $styleCssPath = __DIR__ . "/../../../public/css/style.css";
+    $adminCssPath = __DIR__ . "/../../../public/css/admin.css";
+    ?>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css?v=<?= is_file($styleCssPath) ? filemtime($styleCssPath) : 1 ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/admin.css?v=<?= is_file($adminCssPath) ? filemtime($adminCssPath) : 1 ?>">
 </head>
 <body class="admin-body">
 

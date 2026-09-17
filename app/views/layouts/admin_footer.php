@@ -14,7 +14,8 @@
 
     <div id="toast" class="toast"></div>
 
-    <script src="<?= BASE_URL ?>/js/admin.js"></script>
+    <?php $adminJsPath = __DIR__ . "/../../../public/js/admin.js"; ?>
+    <script src="<?= BASE_URL ?>/js/admin.js?v=<?= is_file($adminJsPath) ? filemtime($adminJsPath) : 1 ?>"></script>
 
 </body>
 </html>

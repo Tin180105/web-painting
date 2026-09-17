@@ -694,6 +694,10 @@ p {
     box-shadow: var(--shadow);
     flex-wrap: wrap;
 }
+.detail-gallery {
+    width: 440px;
+    max-width: 100%;
+}
 .detail-img {
     width: 440px;
     max-width: 100%;
@@ -701,6 +705,30 @@ p {
     object-fit: cover;
     border-radius: 8px;
     background: #eee;
+}
+.detail-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+.detail-thumb {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #eee;
+    border: 2px solid transparent;
+    cursor: pointer;
+    opacity: .75;
+    transition: opacity .15s ease, border-color .15s ease;
+}
+.detail-thumb:hover {
+    opacity: 1;
+}
+.detail-thumb.active {
+    border-color: var(--coral);
+    opacity: 1;
 }
 .detail-info {
     flex: 1;

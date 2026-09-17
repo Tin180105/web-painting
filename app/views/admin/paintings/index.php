@@ -54,6 +54,7 @@ require __DIR__ . "/../../layouts/admin_header.php"; ?>
                                 src="<?= htmlspecialchars($painting["image"] ?: "https://via.placeholder.com/60") ?>"
                                 width="60"
                                 style="border-radius:6px;object-fit:cover;"
+                                onerror="this.onerror=null;this.src='https://via.placeholder.com/60?text=Loi';"
                             >
                         </td>
                         <td><?= htmlspecialchars($painting["painting_name"]) ?></td>

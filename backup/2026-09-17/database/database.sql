@@ -41,19 +41,6 @@ CREATE TABLE paintings (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE painting_images (
-    image_id INT AUTO_INCREMENT PRIMARY KEY,
-    painting_id INT NOT NULL,
-    image_path VARCHAR(255) NOT NULL,
-    sort_order INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (painting_id)
-        REFERENCES paintings(painting_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
 CREATE TABLE addresses (
     address_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,

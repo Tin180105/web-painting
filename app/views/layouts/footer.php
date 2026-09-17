@@ -23,6 +23,7 @@
             <span>Chọn điều đẹp đẽ.</span>
         </div>
     </footer>
-    <script src="<?= BASE_URL ?>/js/client.js"></script>
+    <?php $clientJsPath = __DIR__ . "/../../../public/js/client.js"; ?>
+    <script src="<?= BASE_URL ?>/js/client.js?v=<?= is_file($clientJsPath) ? filemtime($clientJsPath) : 1 ?>"></script>
 </body>
 </html>
