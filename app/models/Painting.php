@@ -26,7 +26,7 @@ class Painting
         }
 
         if (!empty($filters["keyword"])) {
-            $sql .= " AND p.painting_name LIKE :keyword";
+            $sql .= " AND LOWER(p.painting_name) COLLATE utf8mb4_bin LIKE LOWER(:keyword)";
             $params[":keyword"] = "%" . $filters["keyword"] . "%";
         }
 
