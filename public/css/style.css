@@ -35,18 +35,14 @@
 *::after {
     box-sizing: border-box;
 }
-
 html {
     scroll-behavior: smooth;
 }
 body {
     margin: 0;
-
     color: var(--ink);
     background: var(--paper);
-
     font-family: 'DM Sans', Arial, Helvetica, sans-serif;
-
     font-size: 16px;
     line-height: 1.6;
 }
@@ -77,28 +73,15 @@ body::before {
     content: "";
     display: block;
     height: 5px;
-    background:
-        linear-gradient(
-            90deg,
-            var(--coral),
-            var(--gold) 45%,
-            var(--teal)
-        );
+    background: linear-gradient( 90deg, var(--coral), var(--gold) 45%, var(--teal) );
 }
 /* =========================================================
    3. TYPOGRAPHY
    ========================================================= */
-h1,
-h2,
-h3 {
+h1, h2, h3{
     margin-top: 0;
     color: var(--ink);
-
-    font-family:
-        'Playfair Display',
-        Georgia,
-        serif;
-
+    font-family: 'Playfair Display', Georgia, serif;
     line-height: 1.2;
 }
 h1 {
@@ -166,167 +149,97 @@ p {
 .logo {
     width: 48px;
     height: 48px;
-
     padding: 5px;
-
     border-radius: 50%;
-
     background: #2b393a;
-
     object-fit: contain;
-
-    filter:
-        invert(1)
-        brightness(1.65)
-        contrast(1.15);
-
+    filter: invert(1) brightness(1.65) contrast(1.15);
     mix-blend-mode: screen;
 }
-
-
 .nav-links {
     display: flex;
-
     align-items: center;
-
     justify-content: flex-end;
-
     gap: 18px;
-
     flex-wrap: wrap;
 }
-
-
 .nav-links a {
     margin: 0;
-
     color: #f7f4ee;
-
     font-size: 15px;
     font-weight: 600;
-
     text-decoration: none;
-
     transition:
         color .2s ease;
 }
-
-
 .nav-links a:hover {
     color: var(--gold);
-
     text-decoration: none;
 }
-
-
 .nav-user {
     margin: 0;
-
     color: #cbd5d2;
-
     font-size: 14px;
-
     white-space: nowrap;
 }
-
-
 .cart-link {
     position: relative;
 }
-
-
 .cart-badge {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     min-width: 20px;
     height: 20px;
-
     margin-left: 4px;
-
     padding: 0 5px;
-
     border-radius: 50%;
-
     background: var(--danger);
-
     color: #fff;
-
     font-size: 11px;
     font-weight: 700;
-
     line-height: 1;
 }
-
-
 /* =========================================================
    6. TOAST
    ========================================================= */
-
 .toast {
     position: fixed;
-
     top: 25px;
     right: 25px;
-
     z-index: 9999;
-
     max-width: 360px;
-
     padding: 12px 18px;
-
     border-radius: var(--radius-sm);
-
     background: var(--ink);
-
     color: #fff;
-
     box-shadow: var(--shadow-lg);
-
     opacity: 0;
-
     pointer-events: none;
-
     transform:
         translateY(-10px);
-
     transition:
         opacity .25s ease,
         transform .25s ease;
 }
-
-
 .toast.show {
     opacity: 1;
-
     transform:
         translateY(0);
 }
-
-
 .toast-error {
     background: var(--danger);
 }
-
-
 /* =========================================================
    7. HERO BANNER
    ========================================================= */
-
 .hero {
     position: relative;
-
     width: 100vw;
-
     margin-left:
         calc(50% - 50vw);
-
     margin-bottom: 65px;
-
     overflow: hidden;
-
     background:
         radial-gradient(
             circle at 82% 45%,
@@ -340,1628 +253,952 @@ p {
             #e6d4b3 100%
         );
 }
-
-
 .hero::before {
     content: "";
-
     position: absolute;
-
     width: 520px;
     height: 520px;
-
     top: -250px;
     right: -180px;
-
     border: 70px solid rgba(28, 116, 115, .10);
-
     border-radius: 50%;
-
     transform: rotate(-18deg);
 }
-
-
 .hero::after {
     content: "";
-
     position: absolute;
-
     width: 420px;
     height: 80px;
-
     left: -100px;
     bottom: 35px;
-
     border-radius: 50%;
-
     background: rgba(232, 111, 81, .12);
-
     transform: rotate(-12deg);
 }
-
-
 .hero-wrap {
     position: relative;
-
     z-index: 2;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 50px;
-
     width: min(
         var(--container-width),
         calc(100% - 40px)
     );
-
     min-height: 380px;
-
     margin: 0 auto;
-
     padding: 50px 0;
 }
-
-
 /* Banner text */
-
 .hero-copy {
     width: 48%;
-
     padding-left: 15px;
 }
-
-
 .hero-tag {
     margin: 0 0 10px;
-
     color: var(--coral-dark);
-
     font-size: 12px;
     font-weight: 700;
-
     letter-spacing: .2em;
 }
-
-
 .hero-copy h2 {
     margin: 0 0 18px;
-
     color: var(--ink);
-
     font-size:
         clamp(40px, 5vw, 62px);
-
     line-height: 1.05;
 }
-
-
 .hero-copy h2 span {
     color: var(--teal);
 }
-
-
 .hero-desc {
     max-width: 500px;
-
     margin: 0 0 26px;
-
     color: var(--muted);
-
     font-size: 16px;
-
     line-height: 1.7;
 }
-
-
 .hero-btn {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     min-height: 46px;
-
     padding: 10px 24px;
-
     border-radius: 7px;
-
     background: var(--coral);
-
     color: #fff;
-
     font-size: 14px;
     font-weight: 700;
-
     text-decoration: none;
-
     transition:
         background .2s ease,
         transform .2s ease,
         box-shadow .2s ease;
 }
-
-
 .hero-btn:hover {
     background: var(--coral-dark);
-
     color: #fff;
-
     transform:
         translateY(-2px);
-
     box-shadow:
         0 10px 24px rgba(201, 86, 62, .25);
 }
-
-
 /* =========================================================
    8. HERO ARTWORK
    ========================================================= */
-
 .hero-art {
     position: relative;
-
     width: 48%;
-
     min-height: 300px;
 }
-
-
 .frame {
     position: absolute;
-
     overflow: hidden;
-
     border: 8px solid #fff;
-
     background: #fff;
-
     box-shadow:
         0 15px 30px rgba(32, 42, 45, .18);
-
     transition:
         transform .3s ease,
         box-shadow .3s ease;
 }
-
-
 .frame img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
-
-
 /* Image 1 */
-
 .frame-1 {
     top: 40px;
     right: 240px;
-
     width: 180px;
     height: 220px;
-
     transform: rotate(-8deg);
-
     z-index: 1;
 }
-
-
 /* Image 2 */
-
 .frame-2 {
     top: 15px;
     right: 75px;
-
     width: 220px;
     height: 260px;
-
     transform: rotate(5deg);
-
     z-index: 2;
 }
-
-
 /* Image 3 */
-
 .frame-3 {
     top: 75px;
     right: -15px;
-
     width: 150px;
     height: 190px;
-
     transform: rotate(11deg);
-
     z-index: 1;
 }
-
-
 .frame:hover {
     z-index: 10;
-
     transform:
         rotate(0deg)
         translateY(-8px);
-
     box-shadow:
         0 20px 40px rgba(32, 42, 45, .25);
 }
-
-
 /* =========================================================
    9. PAINTING SECTION
    ========================================================= */
-
 .paint-sec {
     scroll-margin-top: 30px;
 }
-
-
 .paint-head {
     max-width: 700px;
-
     margin: 0 auto 32px;
-
     text-align: center;
 }
-
-
 .paint-head .section-kicker {
     margin: 0 0 8px;
 }
-
-
 .paint-head h1 {
     margin: 0 0 12px;
-
     font-size:
         clamp(38px, 5vw, 54px);
 }
-
-
 .paint-head > p:last-child {
     max-width: 600px;
-
     margin: 0 auto;
-
     color: var(--muted);
-
     font-size: 15px;
-
     line-height: 1.7;
 }
-
-
 .section-kicker {
     margin: 0 0 10px;
-
     color: var(--coral-dark);
-
     font-size: 12px;
-
     font-weight: 700;
-
     letter-spacing: .16em;
 }
-
-
 /* =========================================================
    10. FILTER BAR
    ========================================================= */
-
 .filters {
     display: grid;
-
     grid-template-columns:
         250px
         minmax(280px, 1fr)
         170px
         72px;
-
     align-items: center;
-
     gap: 12px;
-
     width: 100%;
-
     margin: 0 0 36px;
-
     padding: 18px;
-
     border: 1px solid var(--line);
-
     border-radius: 14px;
-
     background: rgba(255, 255, 255, .96);
-
     box-shadow: var(--shadow);
-
     backdrop-filter: blur(8px);
 }
-
-
 .filters input,
 .filters select {
     width: 100%;
-
     height: 50px;
-
     padding: 0 15px;
-
     border: 1px solid #dcdad3;
-
     border-radius: 8px;
-
     outline: none;
-
     background: #fff;
-
     color: var(--ink);
-
     font-family: inherit;
-
     font-size: 15px;
-
     transition:
         border-color .2s ease,
         box-shadow .2s ease;
 }
-
-
 .filters input::placeholder {
     color: #9a9f9e;
 }
-
-
 .filters input:hover,
 .filters select:hover {
     border-color: #b9c9c4;
 }
-
-
 .filters input:focus,
 .filters select:focus {
     border-color: var(--teal);
-
     box-shadow:
         0 0 0 3px rgba(28, 116, 115, .10);
 }
-
-
 .filters select {
     cursor: pointer;
 }
-
-
 .filters button {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 100%;
     height: 50px;
-
     padding: 0 14px;
-
     border: none;
-
     border-radius: 8px;
-
     background: var(--teal);
-
     color: #fff;
-
     font-size: 15px;
     font-weight: 700;
-
     cursor: pointer;
-
     transition:
         background .2s ease,
         transform .2s ease,
         box-shadow .2s ease;
 }
-
-
 .filters button:hover {
     background: var(--teal-dark);
-
     transform:
         translateY(-1px);
-
     box-shadow:
         0 7px 16px rgba(28, 116, 115, .20);
 }
-
-
 .filters button:active {
     transform:
         translateY(0);
 }
-
-
 /* =========================================================
    11. PRODUCT GRID
    ========================================================= */
-
 .products {
     display: grid;
-
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
-
     gap: 26px;
 }
-
-
 .product {
     overflow: hidden;
-
     border: 1px solid var(--line);
-
     border-radius: 12px;
-
     background: var(--surface);
-
     box-shadow: var(--shadow-sm);
-
     transition:
         transform .25s ease,
         box-shadow .25s ease,
         border-color .25s ease;
 }
-
-
 .product:hover {
     border-color: #d5dcd8;
-
     transform:
         translateY(-6px);
-
     box-shadow: var(--shadow-lg);
 }
-
-
 .prod-img {
     display: block;
-
     width: 100%;
     height: 245px;
-
     object-fit: cover;
-
     background: #e8e7df;
-
     transition:
         transform .35s ease;
 }
-
-
 .product:hover .prod-img {
     transform:
         scale(1.03);
 }
-
-
 .prod-info {
     padding: 18px;
 }
-
-
 .prod-name {
     display: block;
-
     margin-bottom: 7px;
-
     color: var(--ink);
-
     font-family:
         'Playfair Display',
         Georgia,
         serif;
-
     font-size: 19px;
     font-weight: 700;
-
     line-height: 1.3;
-
     text-decoration: none;
-
     transition:
         color .2s ease;
 }
-
-
 .prod-name:hover {
     color: var(--teal);
 }
-
-
 .prod-cat {
     margin: 0 0 8px;
-
     color: var(--muted);
-
     font-size: 13px;
 }
-
-
 .price {
     margin: 0 0 14px;
-
     color: var(--coral-dark);
-
     font-size: 19px;
     font-weight: 700;
 }
-
-
 /* =========================================================
    12. BUTTONS
    ========================================================= */
-
 .btn {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     min-height: 42px;
-
     padding: 9px 15px;
-
     border: none;
-
     border-radius: 7px;
-
     background: var(--coral);
-
     color: #fff;
-
     font-size: 14px;
     font-weight: 700;
-
     line-height: 1.2;
-
     text-decoration: none;
-
     cursor: pointer;
-
     transition:
         background .2s ease,
         transform .2s ease,
         box-shadow .2s ease;
 }
-
-
 .btn:hover {
     background: var(--coral-dark);
-
     color: #fff;
 }
-
-
 .btn:active {
     transform:
         translateY(1px);
 }
-
-
 .btn-add-cart {
     width: 100%;
-
     background: var(--teal);
 }
-
-
 .btn-add-cart:hover {
     background: var(--teal-dark);
-
     box-shadow:
         0 7px 16px rgba(28, 116, 115, .18);
 }
-
-
 .btn-disabled {
     width: 100%;
-
     background: #aaa;
-
     color: #fff;
-
     cursor: not-allowed;
 }
-
-
 .btn-disabled:hover {
     background: #aaa;
 }
-
-
 .btn-remove {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     min-width: 72px;
-
     border: 1px solid var(--danger);
-
     background: #fff;
-
     color: var(--danger);
-
     box-shadow: 0 3px 8px rgba(208, 52, 63, .1);
 }
-
-
 .btn-remove:hover {
     background: var(--danger);
-
     color: #fff;
-
     box-shadow: 0 6px 14px rgba(208, 52, 63, .2);
-
     transform: translateY(-1px);
 }
-
-
 .btn-remove:focus-visible {
     outline: 3px solid rgba(208, 52, 63, .25);
-
     outline-offset: 2px;
 }
-
-
 .checkout {
     margin-top: 16px;
-
     background: var(--coral);
 }
-
-
 .checkout:hover {
     background: var(--coral-dark);
 }
-
-
 .continue {
     display: inline-flex;
-
     align-items: center;
-
     margin-left: 6px;
     padding: 8px 16px;
-
     border: 1px solid var(--teal);
     border-radius: var(--radius-sm);
-
     background: var(--teal-light);
     color: var(--teal-dark);
-
     font-weight: 700;
-
     text-decoration: none;
-
     transition:
         background .2s ease,
         color .2s ease,
         box-shadow .2s ease,
         transform .2s ease;
 }
-
-
 .continue:hover {
     background: var(--teal);
     color: #fff;
-
     box-shadow: 0 6px 14px rgba(28, 116, 115, .2);
-
     transform: translateY(-1px);
 }
-
-
 .continue:focus-visible {
     outline: 3px solid rgba(28, 116, 115, .22);
-
     outline-offset: 2px;
 }
-
-
 /* =========================================================
    13. PRODUCT DETAIL
    ========================================================= */
-
 .detail {
     display: flex;
-
     align-items: flex-start;
-
     gap: 35px;
-
     padding: 28px;
-
     border: 1px solid var(--line);
-
     border-radius: var(--radius);
-
     background: var(--surface);
-
     box-shadow: var(--shadow);
-
     flex-wrap: wrap;
 }
-
-
 .detail-img {
     width: 440px;
     max-width: 100%;
-
     aspect-ratio: 1 / 1;
-
     object-fit: cover;
-
     border-radius: 8px;
-
     background: #eee;
 }
-
-
 .detail-info {
     flex: 1;
-
     min-width: 280px;
 }
-
-
 .detail-info h1 {
     margin-bottom: 12px;
 }
-
-
 .detail-info .price {
     margin: 20px 0;
-
     font-size: 26px;
 }
-
-
 /* =========================================================
    14. QUANTITY
    ========================================================= */
-
 .qty {
     display: inline-flex;
-
     align-items: center;
-
     gap: 0;
-
     margin: 10px 0 18px;
-
     overflow: hidden;
-
     border: 1px solid var(--line-dark);
-
     border-radius: 7px;
-
     background: #fff;
 }
-
-
 .qty button {
     width: 38px;
     height: 38px;
-
     border: none;
-
     background: #f3f5f3;
-
     color: var(--ink);
-
     font-size: 18px;
     font-weight: 700;
-
     cursor: pointer;
-
     transition:
         background .2s ease;
 }
-
-
 .qty button:hover {
     background: var(--teal-light);
-
     color: var(--teal);
 }
-
-
 .qty input,
 .qty-input {
     width: 55px;
     height: 38px;
-
     padding: 5px;
-
     border: 0;
-
     border-right: 1px solid var(--line);
     border-left: 1px solid var(--line);
-
     outline: none;
-
     background: #fff;
-
     color: var(--ink);
-
     text-align: center;
 }
-
-
 /* Remove number arrows */
-
 .qty input::-webkit-inner-spin-button,
 .qty input::-webkit-outer-spin-button,
 .qty-input::-webkit-inner-spin-button,
 .qty-input::-webkit-outer-spin-button {
     margin: 0;
-
     appearance: none;
 }
-
-
 /* =========================================================
    15. CART TABLE
    ========================================================= */
-
 .cart-table {
     width: 100%;
-
     border-collapse: separate;
-
     border-spacing: 0;
-
     overflow: hidden;
-
     border: 1px solid var(--line);
-
     border-radius: var(--radius);
-
     background: var(--surface);
-
     box-shadow: var(--shadow-sm);
 }
-
-
 .cart-table th,
 .cart-table td {
     padding: 15px;
-
     border-bottom: 1px solid #eee;
-
     text-align: left;
-
     vertical-align: middle;
 }
-
-
 .cart-table th {
     background: #f6f8f6;
-
     color: var(--ink);
-
     font-size: 14px;
-
     font-weight: 700;
 }
-
-
 .cart-table tr:last-child td {
     border-bottom: none;
 }
-
-
 .cart-table tbody tr:hover {
     background: #fafcfb;
 }
-
-
 .order-link {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     min-width: 58px;
     padding: 7px 12px;
-
     border: 1px solid var(--teal);
     border-radius: 6px;
-
     background: rgba(28, 116, 115, .06);
-
     color: var(--teal-dark);
-
     font-size: 13px;
     font-weight: 700;
-
     text-decoration: none;
-
     transition:
         background .2s ease,
         color .2s ease,
         box-shadow .2s ease,
         transform .2s ease;
 }
-
-
 .order-link:hover {
     background: var(--teal);
-
     color: #fff;
-
     box-shadow: 0 5px 12px rgba(28, 116, 115, .18);
-
     transform: translateY(-1px);
 }
-
-
 .order-link:focus-visible {
     outline: 3px solid rgba(28, 116, 115, .24);
-
     outline-offset: 2px;
 }
-
-
 .cart-prod {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
     min-width: 220px;
-
     font-weight: 600;
 }
-
-
 .cart-prod img {
     width: 60px;
     height: 60px;
-
     flex: 0 0 auto;
-
     object-fit: cover;
-
     border-radius: 6px;
-
     background: #eee;
 }
-
-
 .cart-total {
     margin-top: 20px;
-
     color: var(--ink);
-
     font-size: 20px;
-
     text-align: right;
 }
-
-
 .cart-total strong {
     color: var(--coral-dark);
-
     font-size: 22px;
 }
-
-
 /* =========================================================
    16. ADDRESS
    ========================================================= */
-
 .address-page {
     width: min(920px, 100%);
-
     margin: 0 auto;
 }
-
-
 .addr-form-page {
     width: min(920px, 100%);
-
     margin: 0 auto;
 }
-
-
 .addr-head {
     max-width: 650px;
-
     margin: 0 auto 28px;
-
     text-align: center;
 }
-
-
 .addr-head h1 {
     margin-bottom: 12px;
 }
-
-
 .addr-head > p:last-child {
     margin: 0;
-
     color: var(--muted);
 }
-
-
 /* Address page header */
-
 .address-page-header {
     display: flex;
-
     align-items: flex-end;
-
     justify-content: space-between;
-
     gap: 24px;
-
     margin-bottom: 34px;
 }
-
-
 .address-page-header h1 {
     margin: 0 0 8px;
-
     font-size:
         clamp(36px, 5vw, 54px);
 }
-
-
 .address-page-intro {
     max-width: 510px;
-
     margin: 0;
-
     color: var(--muted);
-
     font-size: 16px;
 }
-
-
 .address-add-button {
     flex: 0 0 auto;
-
     padding: 11px 18px;
-
     white-space: nowrap;
 }
-
-
 /* Address message */
-
 .address-message {
     margin: 0 0 20px;
-
     padding: 12px 16px;
-
     border-left: 3px solid var(--teal);
-
     background: var(--teal-light);
-
     color: var(--teal-dark);
 }
-
-
 /* Address list */
-
 .addr-list {
     display: flex;
-
     flex-direction: column;
-
     gap: 16px;
-
     width: 100%;
-
     max-width: 920px;
-
     margin: 0 auto;
 }
-
-
 .addr-card {
     position: relative;
-
     padding: 24px 26px 20px;
-
     border: 1px solid var(--line);
-
     border-radius: 8px;
-
     background: var(--surface);
-
     box-shadow:
         0 8px 24px rgba(32, 42, 45, .06);
-
     transition:
         border-color .2s ease,
         box-shadow .2s ease,
         transform .2s ease;
 }
-
-
 .addr-card:hover {
     border-color: #c8d8d2;
-
     box-shadow:
         0 14px 30px rgba(32, 42, 45, .10);
-
     transform:
         translateY(-2px);
 }
-
-
 /* Address recipient */
-
 .addr-top {
     display: flex;
-
     align-items: flex-start;
-
     justify-content: space-between;
-
     gap: 16px;
 }
-
-
 .address-recipient {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 }
-
-
 .address-avatar {
     display: grid;
-
     width: 42px;
     height: 42px;
-
     place-items: center;
-
     flex: 0 0 auto;
-
     border-radius: 50%;
-
     background: var(--teal-light);
-
     color: var(--teal);
-
     font-size: 21px;
     font-weight: 700;
 }
-
-
 .address-recipient h2 {
     margin: 0;
-
     font-family:
         'DM Sans',
         Arial,
         sans-serif;
-
     font-size: 18px;
 }
-
-
 .address-recipient p {
     margin: 1px 0 0;
-
     color: var(--muted);
-
     font-size: 14px;
 }
-
-
 /* Default badge */
-
 .badge-default {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     flex: 0 0 auto;
-
     padding: 4px 10px;
-
     border-radius: 20px;
-
     background: var(--teal-light);
-
     color: var(--teal);
-
     font-size: 12px;
-
     font-weight: 700;
 }
-
-
 /* Address location */
-
 .address-location {
     display: grid;
-
     gap: 2px;
-
     margin: 22px 0 18px 54px;
-
     color: var(--ink);
 }
-
-
 .address-location-label {
     color: var(--muted);
-
     font-size: 12px;
-
     font-weight: 700;
-
     letter-spacing: .08em;
-
     text-transform: uppercase;
 }
-
-
 /* Address actions */
-
 .addr-actions {
     display: flex;
-
     align-items: center;
-
     justify-content: flex-start;
-
     gap: 10px;
-
     margin: 0;
-
     padding-top: 16px;
-
     border-top: 1px solid var(--line);
 }
-
-
 .addr-card .addr-actions > a,
 .addr-card .addr-actions > button {
     display: inline-flex;
-
     align-items: center;
-
     min-height: 34px;
-
     padding: 7px 15px;
-
     border: 1px solid;
-
     border-radius: 6px;
-
     font: inherit;
-
     font-size: 14px;
-
     font-weight: 700;
-
     line-height: 1.2;
-
     text-decoration: none;
-
     cursor: pointer;
-
     transition:
         background-color .2s ease,
         border-color .2s ease,
         color .2s ease;
 }
-
-
 .addr-card .addr-actions > a {
     border-color: var(--teal);
-
     background: var(--teal);
-
     color: #fff;
 }
-
-
 .addr-card .addr-actions > a:hover {
     border-color: var(--teal-dark);
-
     background: var(--teal-dark);
-
     color: #fff;
 }
-
-
 .addr-card .addr-actions > button {
     border-color: #d8dfdc;
-
     background: #fff;
-
     color: #64716f;
 }
-
-
 .addr-card .addr-actions > button:hover {
     border-color: #9eb7ae;
-
     background: #f1f5f3;
-
     color: var(--ink);
 }
-
-
 .addr-card .addr-actions > button.btn-remove {
     border-color: var(--coral);
-
     background: var(--coral);
-
     color: #fff;
 }
-
-
 .addr-card .addr-actions > button.btn-remove:hover {
     border-color: var(--coral-dark);
-
     background: var(--coral-dark);
-
     color: #fff;
 }
-
-
 /* Empty address */
-
 .address-empty-state {
     padding: 56px 24px;
-
     border: 1px dashed #c8d1cb;
-
     border-radius: 8px;
-
     background:
         linear-gradient(
             135deg,
             #fff,
             #f1f7f3
         );
-
     text-align: center;
 }
-
-
 .address-empty-icon {
     display: grid;
-
     width: 58px;
     height: 58px;
-
     margin: 0 auto 18px;
-
     place-items: center;
-
     border-radius: 50%;
-
     background: var(--teal);
-
     color: #fff;
-
     font-size: 26px;
 }
-
-
 .address-empty-state h2 {
     margin: 0 0 6px;
-
     font-size: 28px;
 }
-
-
 .address-empty-state p {
     margin: 0 auto 22px;
-
     color: var(--muted);
 }
-
-
 /* Address form */
-
 .addr-form {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 20px 24px;
-
     width: 100%;
-
     padding: 30px;
-
     margin: 0;
-
     border: 1px solid var(--line);
-
     border-radius: var(--radius);
-
     background: var(--surface);
-
     box-shadow: var(--shadow);
 }
-
-
 .addr-form .addr-field {
     margin: 0;
 }
-
-
 .addr-form .addr-wide {
     grid-column: 1 / -1;
 }
-
-
 .addr-form label {
     display: block;
-
     margin-bottom: 7px;
-
     color: var(--ink);
-
     font-size: 14px;
-
     font-weight: 600;
 }
-
-
 .addr-form input[type="text"] {
     width: 100%;
-
     max-width: none;
-
     min-height: 44px;
-
     padding: 10px 13px;
-
     border: 1px solid #d8d9d2;
-
     border-radius: 5px;
-
     background: #fff;
-
     color: var(--ink);
-
     font: inherit;
 }
-
-
 .addr-form input[type="text"]:focus {
     outline: none;
-
     border-color: var(--teal);
-
     box-shadow:
         0 0 0 3px rgba(28, 116, 115, .10);
 }
-
-
 .addr-default {
     grid-column: 1 / -1;
-
     margin: 0;
-
     padding-top: 2px;
 }
-
-
 .addr-default label {
     display: flex;
-
     align-items: center;
-
     gap: 9px;
-
     margin: 0;
-
     font-weight: 600;
 }
-
-
 .addr-default input {
     width: 17px;
     height: 17px;
-
     accent-color: var(--teal);
 }
-
-
 .addr-submit {
     grid-column: 1 / -1;
-
     min-height: 46px;
-
     border: 0;
-
     border-radius: 6px;
-
     background: var(--coral);
-
     color: #fff;
-
     cursor: pointer;
-
     font: inherit;
-
     font-weight: 700;
-
     transition:
         background .2s ease,
         transform .2s ease;
 }
-
-
 .addr-submit:hover {
     background: var(--coral-dark);
-
     transform:
         translateY(-1px);
 }
-
-
 .addr-back {
     display: block;
-
     width: fit-content;
-
     margin: 20px auto 0;
-
     color: var(--teal);
-
     font-weight: 600;
 }
-
-
 /* =========================================================
    17. GENERAL FORM
    ========================================================= */
-
 form div {
     margin-bottom: 10px;
 }
-
-
 form label {
     display: block;
-
     margin-bottom: 4px;
-
     font-weight: 600;
 }
-
-
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
@@ -1969,336 +1206,195 @@ form input[type="number"],
 form textarea,
 form select {
     width: 100%;
-
     max-width: 400px;
-
     padding: 10px 12px;
-
     border: 1px solid #d8d9d2;
-
     border-radius: 5px;
-
     background: #fff;
-
     color: var(--ink);
-
     font: inherit;
 }
-
-
 form textarea {
     min-height: 110px;
-
     resize: vertical;
 }
-
-
 form input:focus,
 form textarea:focus,
 form select:focus {
     outline: none;
-
     border-color: var(--teal);
-
     box-shadow:
         0 0 0 3px rgba(28, 116, 115, .10);
 }
-
-
 /* =========================================================
    18. AUTHENTICATION
    ========================================================= */
-
 .auth {
     min-height: 100vh;
-
     background: var(--paper);
 }
-
-
 .auth-wrap {
     display: grid;
-
     grid-template-columns:
         minmax(280px, .9fr)
         minmax(360px, 1.1fr);
-
     width: min(1080px, calc(100% - 40px));
-
     min-height: 650px;
-
     margin: 42px auto;
-
     overflow: hidden;
-
     border: 1px solid var(--line);
-
     border-radius: var(--radius);
-
     background: var(--surface);
-
     box-shadow: var(--shadow-lg);
 }
-
-
 .auth-info {
     display: flex;
-
     flex-direction: column;
-
     justify-content: flex-end;
-
     padding: 48px;
-
     color: #eef4f0;
-
     background: var(--teal);
 }
-
-
 .auth-logo {
     align-self: flex-start;
-
     margin-bottom: 0;
-
     color: #fff;
-
     font-family:
         'Playfair Display',
         Georgia,
         serif;
-
     font-size: 26px;
 }
-
-
 .auth-logo-image {
     align-self: center;
-
     width: 140px;
     height: 140px;
-
     margin-top: 36px;
     margin-bottom: auto;
-
     border: 3px solid #fff;
     border-radius: 50%;
-
     object-fit: cover;
 }
-
-
 .auth-tag,
 .auth-box-tag {
     margin: 0 0 14px;
-
     color: var(--gold);
-
     font-size: 12px;
-
     font-weight: 700;
-
     letter-spacing: .16em;
 }
-
-
 .auth-info h1 {
     max-width: 390px;
-
     margin: 0 0 18px;
-
     color: #fff;
-
     font-size:
         clamp(34px, 4vw, 52px);
 }
-
-
 .auth-info p:last-child {
     max-width: 390px;
-
     margin: 0;
-
     color: #cde0da;
 }
-
-
 .auth-box {
     align-self: center;
-
     width: min(100%, 480px);
-
     padding: 54px 64px;
-
     justify-self: center;
 }
-
-
 .auth-box h2 {
     margin: 0 0 8px;
-
     font-size: 38px;
 }
-
-
 .auth-sub {
     margin: 0 0 30px;
-
     color: var(--muted);
 }
-
-
 .msg {
     margin: 0 0 22px;
-
     padding: 12px 14px;
-
     border-left: 3px solid var(--coral);
-
     background: #fff1ed;
-
     color: #9d3d2b;
-
     font-size: 14px;
 }
-
-
 .auth-form {
     width: 100%;
-
     max-width: none;
-
     padding: 0;
-
     margin: 0;
-
     border: 0;
-
     background: transparent;
-
     box-shadow: none;
 }
-
-
 .auth-form div {
     margin-bottom: 18px;
 }
-
-
 .auth-form label {
     margin-bottom: 7px;
-
     color: var(--ink);
-
     font-size: 14px;
 }
-
-
 .auth-form input {
     width: 100%;
-
     max-width: none;
-
     min-height: 46px;
-
     padding: 10px 13px;
-
     border: 1px solid #d8d9d2;
-
     border-radius: 5px;
-
     background: #fff;
-
     color: var(--ink);
-
     font: inherit;
 }
-
-
 .auth-form input:focus {
     outline: none;
-
     border-color: var(--teal);
-
     box-shadow:
         0 0 0 3px rgba(28, 116, 115, .10);
 }
-
-
 .auth-submit {
     width: 100%;
-
     min-height: 48px;
-
     margin-top: 8px;
-
     padding: 11px 18px;
-
     border: 0;
-
     border-radius: 6px;
-
     background: var(--coral);
-
     color: #fff;
-
     cursor: pointer;
-
     font: inherit;
-
     font-weight: 700;
-
     transition:
         background .2s ease,
         transform .2s ease,
         box-shadow .2s ease;
 }
-
-
 .auth-submit:hover {
     background: var(--coral-dark);
-
     box-shadow:
         0 8px 18px rgba(201, 86, 62, .22);
-
     transform:
         translateY(-1px);
 }
-
-
 .auth-submit:active {
     transform:
         translateY(0);
 }
-
-
 .auth-switch {
     margin: 24px 0 0;
-
     color: var(--muted);
-
     text-align: center;
-
     font-size: 14px;
 }
-
-
 .auth-switch a {
     color: var(--coral-dark);
-
     font-weight: 600;
 }
-
-
 /* =========================================================
    19. FOOTER
    ========================================================= */
-
 .footer {
     padding: 52px 24px 22px;
-
     color: #e8eeeb;
-
     background: var(--ink);
 }
 .foot-wrap,
