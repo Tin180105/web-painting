@@ -14,6 +14,12 @@ require __DIR__ . "/../../layouts/admin_header.php";
         </div>
     </div>
 
+    <a href="<?= BASE_URL ?>/admin/users/create" class="btn" data-modal-form data-modal-title="Thêm tài khoản">
+        Thêm tài khoản
+    </a>
+
+    <br><br>
+
     <section class="admin-panel">
 
         <div class="admin-panel-head">
@@ -70,6 +76,15 @@ require __DIR__ . "/../../layouts/admin_header.php";
                             <td><?= date("d/m/Y", strtotime($user["created_at"])) ?></td>
                             <td>
                                 <a href="<?= BASE_URL ?>/admin/users/<?= $user["user_id"] ?>" class="admin-table-link">Xem</a>
+                                |
+                                <a
+                                    href="<?= BASE_URL ?>/admin/users/edit/<?= $user["user_id"] ?>"
+                                    class="admin-table-link"
+                                    data-modal-form
+                                    data-modal-title="Sửa tài khoản"
+                                >
+                                    Sửa
+                                </a>
 
                                 <?php if ((int) $user["user_id"] !== (int) $_SESSION["user_id"]): ?>
                                     |
@@ -94,6 +109,14 @@ require __DIR__ . "/../../layouts/admin_header.php";
                                             Khóa
                                         </a>
                                     <?php endif; ?>
+                                    |
+                                    <a
+                                        href="<?= BASE_URL ?>/admin/users/delete/<?= $user["user_id"] ?>"
+                                        class="admin-table-link"
+                                        data-modal-delete
+                                    >
+                                        Xóa
+                                    </a>
                                 <?php endif; ?>
                             </td>
                         </tr>

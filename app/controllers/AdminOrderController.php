@@ -7,9 +7,9 @@ class AdminOrderController extends Controller
 {
     private $orderModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->orderModel = new Order($conn);
+        $this->orderModel = new Order($pdo);
     }
 
     // GET /admin/orders - danh sách đơn hàng, lọc theo status

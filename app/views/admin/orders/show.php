@@ -3,20 +3,6 @@ if (!isset($order)) { $order = []; }
 if (!isset($details)) { $details = []; }
 if (!isset($message)) { $message = ""; }
 
-// Nhãn + màu hiển thị cho từng trạng thái đơn hàng
-function orderStatusMeta($status)
-{
-    $map = [
-        "pending"   => ["Chờ xử lý", "status-pending"],
-        "confirmed" => ["Đã xác nhận", "status-confirmed"],
-        "shipping"  => ["Đang giao", "status-shipping"],
-        "completed" => ["Hoàn thành", "status-completed"],
-        "cancelled" => ["Đã hủy", "status-cancelled"],
-    ];
-
-    return $map[$status] ?? [$status, "status-pending"];
-}
-
 [$statusLabel, $statusClass] = orderStatusMeta($order["status"] ?? "pending");
 
 require __DIR__ . "/../../layouts/admin_header.php";

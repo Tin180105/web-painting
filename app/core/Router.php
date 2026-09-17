@@ -95,7 +95,7 @@ class Router
 
     private function callController($controllerName, $action, $params)
     {
-        global $conn;
+        global $pdo;
 
         $controllerFile = __DIR__ . "/../controllers/{$controllerName}.php";
 
@@ -106,7 +106,7 @@ class Router
 
         require_once $controllerFile;
 
-        $controller = new $controllerName($conn);
+        $controller = new $controllerName($pdo);
 
         if (!method_exists($controller, $action)) {
             $this->notFound();

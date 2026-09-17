@@ -2,11 +2,11 @@
 
 class Painting
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     // Lấy danh sách tranh (dùng cho trang danh sách sản phẩm client)
@@ -26,7 +26,7 @@ class Painting
         }
 
         if (!empty($filters["keyword"])) {
-            $sql .= " AND p.painting_name LIKE :keyword";
+            $sql .= " AND p.painting_name COLLATE utf8mb4_bin LIKE :keyword";
             $params[":keyword"] = "%" . $filters["keyword"] . "%";
         }
 
@@ -41,7 +41,7 @@ class Painting
                 $sql .= " ORDER BY p.created_at DESC";
         }
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
 
         return $stmt->fetchAll();
@@ -55,7 +55,7 @@ class Painting
                 JOIN categories c ON p.category_id = c.category_id
                 WHERE p.painting_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
             ":id" => $id
@@ -71,7 +71,7 @@ class Painting
             JOIN categories c ON p.category_id = c.category_id
             ORDER BY p.created_at DESC";
 
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
 
     return $stmt->fetchAll();
@@ -85,7 +85,7 @@ class Painting
                 VALUES
                 (:category_id, :painting_name, :description, :artist, :price, :quantity, :width, :height, :material, :image, :status)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":category_id" => $data["category_id"],
@@ -119,7 +119,7 @@ class Painting
                     status = :status
                 WHERE painting_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id,
@@ -142,7 +142,7 @@ class Painting
     {
         $sql = "DELETE FROM paintings WHERE painting_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id
@@ -160,7 +160,7 @@ class Painting
                     END
                 WHERE painting_id = :id AND quantity >= :required_quantity";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
             ":id" => $id,

@@ -8,19 +8,19 @@ require_once __DIR__ . "/../models/Painting.php";
 
 class OrderController extends Controller
 {
-    private $conn;
+    private $pdo;
     private $orderModel;
     private $cartModel;
     private $addressModel;
     private $paintingModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
-        $this->orderModel = new Order($conn);
-        $this->cartModel = new Cart($conn);
-        $this->addressModel = new Address($conn);
-        $this->paintingModel = new Painting($conn);
+        $this->pdo = $pdo;
+        $this->orderModel = new Order($pdo);
+        $this->cartModel = new Cart($pdo);
+        $this->addressModel = new Address($pdo);
+        $this->paintingModel = new Painting($pdo);
     }
 
     // GET /checkout - trang xác nhận đơn hàng trước khi đặt
@@ -88,7 +88,7 @@ class OrderController extends Controller
         $total = $this->cartModel->getTotal($cartId);
 
         try {
-            $this->conn->beginTransaction();
+            $this->pdo->beginTransaction();
 
             $orderId = $this->orderModel->create($userId, $addressId, $total, $paymentMethod, $note);
 
@@ -101,10 +101,10 @@ class OrderController extends Controller
             }
 
             $this->cartModel->clear($cartId);
-            $this->conn->commit();
+            $this->pdo->commit();
         } catch (Throwable $exception) {
-            if ($this->conn->inTransaction()) {
-                $this->conn->rollBack();
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
             }
 
             $this->render("client/checkout", [

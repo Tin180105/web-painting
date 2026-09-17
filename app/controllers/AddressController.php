@@ -7,9 +7,9 @@ class AddressController extends Controller
 {
     private $addressModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->addressModel = new Address($conn);
+        $this->addressModel = new Address($pdo);
     }
 
     // GET /addresses - danh sách địa chỉ của customer đang đăng nhập

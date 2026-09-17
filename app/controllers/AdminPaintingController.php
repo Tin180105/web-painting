@@ -9,10 +9,10 @@ class AdminPaintingController extends Controller
     private $paintingModel;
     private $categoryModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->paintingModel = new Painting($conn);
-        $this->categoryModel = new Category($conn);
+        $this->paintingModel = new Painting($pdo);
+        $this->categoryModel = new Category($pdo);
     }
 
     // GET /admin/paintings - danh sách sản phẩm

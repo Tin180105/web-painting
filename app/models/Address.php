@@ -2,11 +2,11 @@
 
 class Address
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     // Lấy tất cả địa chỉ của 1 user, địa chỉ mặc định hiển thị lên đầu
@@ -17,7 +17,7 @@ class Address
                 WHERE user_id = :user_id
                 ORDER BY is_default DESC, address_id DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
 
         return $stmt->fetchAll();
@@ -28,7 +28,7 @@ class Address
     {
         $sql = "SELECT * FROM addresses WHERE address_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":id" => $id]);
 
         return $stmt->fetch();
@@ -39,7 +39,7 @@ class Address
     {
         $sql = "SELECT COUNT(*) AS total FROM addresses WHERE user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
 
         return (int) $stmt->fetch()["total"];
@@ -60,7 +60,7 @@ class Address
                 VALUES
                 (:user_id, :receiver_name, :phone, :address_detail, :ward, :district, :province, :is_default)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":user_id" => $userId,
@@ -91,7 +91,7 @@ class Address
                     is_default = :is_default
                 WHERE address_id = :id AND user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id,
@@ -111,7 +111,7 @@ class Address
     {
         $sql = "DELETE FROM addresses WHERE address_id = :id AND user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id,
@@ -128,7 +128,7 @@ class Address
                 SET is_default = 1
                 WHERE address_id = :id AND user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id,
@@ -141,7 +141,7 @@ class Address
     {
         $sql = "UPDATE addresses SET is_default = 0 WHERE user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
     }
 }

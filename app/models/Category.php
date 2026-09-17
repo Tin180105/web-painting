@@ -2,11 +2,11 @@
 
 class Category
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     // Lấy tất cả category
@@ -16,7 +16,7 @@ class Category
                 FROM categories
                 ORDER BY category_id DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll();
@@ -29,7 +29,7 @@ class Category
                 FROM categories
                 WHERE category_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
             ":id" => $id
@@ -46,7 +46,7 @@ public function create($categoryName, $description)
             VALUES
             (:category_name, :description)";
 
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
     return $stmt->execute([
         ":category_name" => $categoryName,
@@ -62,7 +62,7 @@ public function update($id, $categoryName, $description)
                 description = :description
             WHERE category_id = :id";
 
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
     return $stmt->execute([
         ":id" => $id,
@@ -77,7 +77,7 @@ public function update($id, $categoryName, $description)
         $sql = "DELETE FROM categories
                 WHERE category_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $id

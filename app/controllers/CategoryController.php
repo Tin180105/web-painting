@@ -7,9 +7,9 @@ class CategoryController extends Controller
 {
     private $categoryModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->categoryModel = new Category($conn);
+        $this->categoryModel = new Category($pdo);
     }
 
     // GET /admin/categories - danh sách category

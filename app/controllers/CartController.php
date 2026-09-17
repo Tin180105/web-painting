@@ -6,15 +6,15 @@ require_once __DIR__ . "/../models/Painting.php";
 
 class CartController extends Controller
 {
-    private $conn;
+    private $pdo;
     private $cartModel;
     private $paintingModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
-        $this->cartModel = new Cart($conn);
-        $this->paintingModel = new Painting($conn);
+        $this->pdo = $pdo;
+        $this->cartModel = new Cart($pdo);
+        $this->paintingModel = new Painting($pdo);
     }
 
     // GET /cart - trang xem giỏ hàng

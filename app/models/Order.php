@@ -2,11 +2,11 @@
 
 class Order
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     // Tạo đơn hàng mới, trả về order_id vừa tạo
@@ -17,7 +17,7 @@ class Order
                 VALUES
                 (:user_id, :address_id, :total_amount, :payment_method, :note)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
             ":user_id" => $userId,
@@ -27,7 +27,7 @@ class Order
             ":note" => $note
         ]);
 
-        return $this->conn->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
     // Thêm 1 dòng chi tiết đơn hàng (snapshot giá tại thời điểm đặt)
@@ -38,7 +38,7 @@ class Order
                 VALUES
                 (:order_id, :painting_id, :quantity, :price)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":order_id" => $orderId,
@@ -56,7 +56,7 @@ class Order
                 LEFT JOIN addresses a ON o.address_id = a.address_id
                 WHERE o.order_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":id" => $id]);
 
         return $stmt->fetch();
@@ -79,7 +79,7 @@ class Order
     {
         $sql = "SELECT * FROM orders WHERE user_id = :user_id ORDER BY order_id DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
 
         return $stmt->fetchAll();
@@ -101,7 +101,7 @@ class Order
 
         $sql .= " ORDER BY o.order_id DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
 
         return $stmt->fetchAll();
@@ -115,7 +115,7 @@ class Order
                 JOIN paintings p ON od.painting_id = p.painting_id
                 WHERE od.order_id = :order_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":order_id" => $orderId]);
 
         return $stmt->fetchAll();
@@ -128,7 +128,7 @@ class Order
                 SET payment_status = 'paid', status = 'confirmed'
                 WHERE order_id = :id AND payment_status = 'unpaid'";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([":id" => $orderId]);
     }
@@ -138,7 +138,7 @@ class Order
     {
         $sql = "UPDATE orders SET status = :status WHERE order_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $orderId,
@@ -152,10 +152,10 @@ class Order
     {
         $sql = "SELECT MONTH(created_at) AS month, SUM(total_amount) AS revenue
                 FROM orders
-                WHERE payment_status = 'paid' AND YEAR(created_at) = :year
+                WHERE payment_status = 'paid' AND status != 'cancelled' AND YEAR(created_at) = :year
                 GROUP BY MONTH(created_at)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":year" => $year]);
 
         $rows = $stmt->fetchAll();
@@ -177,7 +177,7 @@ class Order
                 FROM orders
                 ORDER BY year DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
         return array_column($stmt->fetchAll(), "year");

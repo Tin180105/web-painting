@@ -2,11 +2,11 @@
 
 class Cart
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     // Lấy cart_id của user, tự động tạo giỏ hàng mới nếu user chưa có
@@ -14,7 +14,7 @@ class Cart
     {
         $sql = "SELECT cart_id FROM carts WHERE user_id = :user_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
 
         $cart = $stmt->fetch();
@@ -25,10 +25,10 @@ class Cart
 
         $sql = "INSERT INTO carts (user_id) VALUES (:user_id)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":user_id" => $userId]);
 
-        return $this->conn->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
     // Lấy danh sách sản phẩm trong giỏ (join với paintings để có tên, giá, ảnh, tồn kho)
@@ -47,7 +47,7 @@ class Cart
                 WHERE cd.cart_id = :cart_id
                 ORDER BY cd.cart_detail_id DESC";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":cart_id" => $cartId]);
 
         return $stmt->fetchAll();
@@ -61,7 +61,7 @@ class Cart
                 JOIN paintings p ON cd.painting_id = p.painting_id
                 WHERE cd.cart_detail_id = :id AND cd.cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         $stmt->execute([
             ":id" => $cartDetailId,
@@ -78,7 +78,7 @@ class Cart
                 VALUES (:cart_id, :painting_id, :quantity)
                 ON DUPLICATE KEY UPDATE quantity = quantity + :quantity2";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":cart_id" => $cartId,
@@ -95,7 +95,7 @@ class Cart
                 SET quantity = :quantity
                 WHERE cart_detail_id = :id AND cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":quantity" => $quantity,
@@ -110,7 +110,7 @@ class Cart
         $sql = "DELETE FROM cart_details
                 WHERE cart_detail_id = :id AND cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
             ":id" => $cartDetailId,
@@ -123,7 +123,7 @@ class Cart
     {
         $sql = "DELETE FROM cart_details WHERE cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([":cart_id" => $cartId]);
     }
@@ -135,7 +135,7 @@ class Cart
                 FROM cart_details
                 WHERE cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":cart_id" => $cartId]);
 
         return (int) $stmt->fetch()["total"];
@@ -149,7 +149,7 @@ class Cart
                 JOIN paintings p ON cd.painting_id = p.painting_id
                 WHERE cd.cart_id = :cart_id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":cart_id" => $cartId]);
 
         return (float) $stmt->fetch()["total"];

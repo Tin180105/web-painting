@@ -7,9 +7,9 @@ class AuthController extends Controller
 {
     private $userModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->userModel = new User($conn);
+        $this->userModel = new User($pdo);
     }
 
     // GET /login - hiển thị form đăng nhập

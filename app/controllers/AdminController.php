@@ -11,11 +11,11 @@ class AdminController extends Controller
     private $paintingModel;
     private $categoryModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->orderModel = new Order($conn);
-        $this->paintingModel = new Painting($conn);
-        $this->categoryModel = new Category($conn);
+        $this->orderModel = new Order($pdo);
+        $this->paintingModel = new Painting($pdo);
+        $this->categoryModel = new Category($pdo);
     }
 
     // GET /admin/dashboard - trang tổng quan sau khi admin đăng nhập
@@ -31,7 +31,7 @@ class AdminController extends Controller
         $pendingCount = 0;
 
         foreach ($orders as $order) {
-            if ($order["payment_status"] === "paid") {
+            if ($order["payment_status"] === "paid" && $order["status"] !== "cancelled") {
                 $totalRevenue += $order["total_amount"];
             }
             if ($order["status"] === "pending") {

@@ -73,7 +73,7 @@ body::before {
     content: "";
     display: block;
     height: 5px;
-    background: var(--coral);
+    background: linear-gradient( 90deg, var(--coral), var(--gold) 45%, var(--teal) );
 }
 /* =========================================================
    3. TYPOGRAPHY
@@ -153,6 +153,8 @@ p {
     border-radius: 50%;
     background: #2b393a;
     object-fit: contain;
+    filter: invert(1) brightness(1.65) contrast(1.15);
+    mix-blend-mode: screen;
 }
 .nav-links {
     display: flex;
@@ -238,7 +240,18 @@ p {
         calc(50% - 50vw);
     margin-bottom: 65px;
     overflow: hidden;
-    background: #fbf3e6;
+    background:
+        radial-gradient(
+            circle at 82% 45%,
+            rgba(239, 179, 95, .22),
+            transparent 28%
+        ),
+        linear-gradient(
+            120deg,
+            #f5eee2 0%,
+            #fffaf2 48%,
+            #e6d4b3 100%
+        );
 }
 .hero::before {
     content: "";
@@ -443,6 +456,7 @@ p {
     border-radius: 14px;
     background: rgba(255, 255, 255, .96);
     box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
 }
 .filters input,
 .filters select {

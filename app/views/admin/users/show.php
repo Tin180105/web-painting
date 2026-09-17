@@ -30,9 +30,19 @@ require __DIR__ . "/../../layouts/admin_header.php";
         <p><strong>Vai trò:</strong> <?= $user["role"] === "admin" ? "Quản trị viên" : "Khách hàng" ?></p>
         <p><strong>Ngày tạo:</strong> <?= date("d/m/Y H:i", strtotime($user["created_at"])) ?></p>
 
-        <?php if ((int) $user["user_id"] !== (int) $_SESSION["user_id"]): ?>
-            <hr style="border:none;border-top:1px solid var(--line);margin:18px 0">
+        <hr style="border:none;border-top:1px solid var(--line);margin:18px 0">
 
+        <a
+            href="<?= BASE_URL ?>/admin/users/edit/<?= $user["user_id"] ?>"
+            class="admin-form-submit"
+            style="display:inline-block;text-decoration:none;margin-right:10px"
+            data-modal-form
+            data-modal-title="Sửa tài khoản"
+        >
+            Sửa tài khoản
+        </a>
+
+        <?php if ((int) $user["user_id"] !== (int) $_SESSION["user_id"]): ?>
             <?php if ($user["status"] === "locked"): ?>
                 <a
                     href="<?= BASE_URL ?>/admin/users/unlock/<?= $user["user_id"] ?>"

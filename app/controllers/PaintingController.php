@@ -7,15 +7,15 @@ require_once __DIR__ . "/../models/Cart.php";
 
 class PaintingController extends Controller
 {
-    private $conn;
+    private $pdo;
     private $paintingModel;
     private $categoryModel;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
-        $this->paintingModel = new Painting($conn);
-        $this->categoryModel = new Category($conn);
+        $this->pdo = $pdo;
+        $this->paintingModel = new Painting($pdo);
+        $this->categoryModel = new Category($pdo);
     }
 
     // GET / - Trang chủ client: danh sách tranh, lọc theo danh mục/từ khóa/sắp xếp
@@ -66,7 +66,7 @@ class PaintingController extends Controller
             return 0;
         }
 
-        $cartModel = new Cart($this->conn);
+        $cartModel = new Cart($this->pdo);
         $cartId = $cartModel->getOrCreateCartId($_SESSION["user_id"]);
 
         return $cartModel->countItems($cartId);
