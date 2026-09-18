@@ -12,7 +12,6 @@ class AdminUserController extends Controller
         $this->userModel = new User($pdo);
     }
 
-    // GET /admin/users - danh sách tài khoản
     public function index()
     {
         requireAdmin();
@@ -28,7 +27,6 @@ class AdminUserController extends Controller
         ]);
     }
 
-    // GET /admin/users/create - hiển thị form thêm tài khoản
     public function create()
     {
         requireAdmin();
@@ -40,7 +38,6 @@ class AdminUserController extends Controller
         ]);
     }
 
-    // POST /admin/users/create - xử lý thêm tài khoản
     public function store()
     {
         requireAdmin();
@@ -92,7 +89,6 @@ class AdminUserController extends Controller
         $this->redirect("/admin/users?message=" . urlencode("Thêm tài khoản thành công"));
     }
 
-    // GET /admin/users/edit/{id} - hiển thị form sửa tài khoản
     public function edit($id)
     {
         requireAdmin();
@@ -111,7 +107,6 @@ class AdminUserController extends Controller
         ]);
     }
 
-    // POST /admin/users/edit/{id} - xử lý cập nhật tài khoản
     public function update($id)
     {
         requireAdmin();
@@ -129,7 +124,6 @@ class AdminUserController extends Controller
         $role = ($_POST["role"] ?? "customer") === "admin" ? "admin" : "customer";
         $isSelf = (int) $id === (int) $_SESSION["user_id"];
 
-        // Không cho admin tự đổi vai trò của chính mình (tránh tự khóa quyền admin)
         if ($isSelf) {
             $role = $user["role"];
         }
@@ -185,7 +179,6 @@ class AdminUserController extends Controller
         $this->redirect("/admin/users?message=" . urlencode("Cập nhật tài khoản thành công"));
     }
 
-    // GET /admin/users/delete/{id} - xử lý xóa tài khoản
     public function delete($id)
     {
         requireAdmin();
@@ -216,7 +209,6 @@ class AdminUserController extends Controller
         }
     }
 
-    // GET /admin/users/{id} - chi tiết 1 tài khoản
     public function show($id)
     {
         requireAdmin();
@@ -234,12 +226,10 @@ class AdminUserController extends Controller
         ]);
     }
 
-    // GET /admin/users/lock/{id} - khóa tài khoản
     public function lock($id)
     {
         requireAdmin();
 
-        // Không cho admin tự khóa chính mình
         if ((int) $id === (int) $_SESSION["user_id"]) {
             $this->redirect("/admin/users?message=" . urlencode("Không thể tự khóa tài khoản của chính mình"));
             return;
@@ -257,7 +247,6 @@ class AdminUserController extends Controller
         $this->redirect("/admin/users?message=" . urlencode("Đã khóa tài khoản"));
     }
 
-    // GET /admin/users/unlock/{id} - mở khóa tài khoản
     public function unlock($id)
     {
         requireAdmin();

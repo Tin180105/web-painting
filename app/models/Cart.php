@@ -9,7 +9,6 @@ class Cart
         $this->pdo = $pdo;
     }
 
-    // Lấy cart_id của user, tự động tạo giỏ hàng mới nếu user chưa có
     public function getOrCreateCartId($userId)
     {
         $sql = "SELECT cart_id FROM carts WHERE user_id = :user_id";
@@ -31,7 +30,6 @@ class Cart
         return $this->pdo->lastInsertId();
     }
 
-    // Lấy danh sách sản phẩm trong giỏ (join với paintings để có tên, giá, ảnh, tồn kho)
     public function getItems($cartId)
     {
         $sql = "SELECT
@@ -53,7 +51,6 @@ class Cart
         return $stmt->fetchAll();
     }
 
-    // Tìm 1 dòng cart_detail theo ID, kèm điều kiện thuộc đúng cart (chống sửa giỏ người khác)
     public function findItem($cartDetailId, $cartId)
     {
         $sql = "SELECT cd.*, p.price, p.quantity AS stock
@@ -71,7 +68,6 @@ class Cart
         return $stmt->fetch();
     }
 
-    // Thêm sản phẩm vào giỏ - nếu đã có (unique cart_id + painting_id) thì cộng dồn số lượng
     public function addItem($cartId, $paintingId, $quantity)
     {
         $sql = "INSERT INTO cart_details (cart_id, painting_id, quantity)
@@ -88,7 +84,6 @@ class Cart
         ]);
     }
 
-    // Cập nhật số lượng 1 sản phẩm trong giỏ
     public function updateQuantity($cartDetailId, $cartId, $quantity)
     {
         $sql = "UPDATE cart_details
@@ -104,7 +99,6 @@ class Cart
         ]);
     }
 
-    // Xóa 1 sản phẩm khỏi giỏ
     public function removeItem($cartDetailId, $cartId)
     {
         $sql = "DELETE FROM cart_details
@@ -118,7 +112,6 @@ class Cart
         ]);
     }
 
-    // Xóa sạch giỏ hàng (dùng sau khi đặt hàng thành công)
     public function clear($cartId)
     {
         $sql = "DELETE FROM cart_details WHERE cart_id = :cart_id";
@@ -128,7 +121,6 @@ class Cart
         return $stmt->execute([":cart_id" => $cartId]);
     }
 
-    // Đếm tổng số lượng sản phẩm trong giỏ (hiển thị badge trên navbar)
     public function countItems($cartId)
     {
         $sql = "SELECT COALESCE(SUM(quantity), 0) AS total
@@ -141,7 +133,6 @@ class Cart
         return (int) $stmt->fetch()["total"];
     }
 
-    // Tính tổng tiền giỏ hàng
     public function getTotal($cartId)
     {
         $sql = "SELECT COALESCE(SUM(cd.quantity * p.price), 0) AS total

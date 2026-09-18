@@ -9,7 +9,6 @@ class Category
         $this->pdo = $pdo;
     }
 
-    // Lấy tất cả category
     public function getAll()
     {
         $sql = "SELECT *
@@ -22,7 +21,6 @@ class Category
         return $stmt->fetchAll();
     }
 
-    // Lấy category theo ID
     public function getById($id)
     {
         $sql = "SELECT *
@@ -38,7 +36,6 @@ class Category
         return $stmt->fetch();
     }
 
-// Thêm category
 public function create($categoryName, $description)
 {
     $sql = "INSERT INTO categories
@@ -54,7 +51,6 @@ public function create($categoryName, $description)
     ]);
 }
 
-// Sửa category
 public function update($id, $categoryName, $description)
 {
     $sql = "UPDATE categories
@@ -71,7 +67,6 @@ public function update($id, $categoryName, $description)
     ]);
 }
 
-    // Xóa category
     public function delete($id)
     {
         $sql = "DELETE FROM categories

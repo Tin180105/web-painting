@@ -23,7 +23,6 @@ class OrderController extends Controller
         $this->paintingModel = new Painting($pdo);
     }
 
-    // GET /checkout - trang xác nhận đơn hàng trước khi đặt
     public function checkout()
     {
         requireLogin();
@@ -43,7 +42,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // POST /checkout - tạo đơn hàng từ giỏ hàng
     public function store()
     {
         requireLogin();
@@ -72,7 +70,6 @@ class OrderController extends Controller
             return;
         }
 
-        // Kiểm tra lại tồn kho trước khi đặt (phòng trường hợp vừa có người mua hết)
         foreach ($items as $item) {
             if ($item["quantity"] > $item["stock"]) {
                 $this->render("client/checkout", [
@@ -119,7 +116,6 @@ class OrderController extends Controller
         $this->redirect("/orders/" . $orderId . "/pay");
     }
 
-    // GET /orders/{id}/pay - trang thanh toán (nhập số tiền)
     public function showPayment($id)
     {
         requireLogin();
@@ -136,7 +132,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // POST /orders/{id}/pay - xử lý thanh toán giả lập
     public function pay($id)
     {
         requireLogin();
@@ -149,7 +144,6 @@ class OrderController extends Controller
 
         $amount = (float) ($_POST["amount"] ?? 0);
 
-        // Thanh toán thành công khi số tiền nhập khớp với tổng đơn hàng
         if (abs($amount - (float) $order["total_amount"]) < 0.01) {
 
             $this->orderModel->markPaid($id);
@@ -163,7 +157,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // GET /orders - danh sách đơn hàng của user đang đăng nhập
     public function index()
     {
         requireLogin();
@@ -173,7 +166,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // GET /orders/{id} - chi tiết 1 đơn hàng
     public function show($id)
     {
         requireLogin();
@@ -187,7 +179,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // Lấy đơn hàng theo ID và kiểm tra thuộc đúng user đang đăng nhập
     private function getOwnedOrderOrDie($id)
     {
         $order = $this->orderModel->getByIdAndUser($id, $_SESSION["user_id"]);

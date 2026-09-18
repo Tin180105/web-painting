@@ -12,7 +12,6 @@ class AuthController extends Controller
         $this->userModel = new User($pdo);
     }
 
-    // GET /login - hiển thị form đăng nhập
     public function showLogin()
     {
         $this->render("auth/login", [
@@ -20,7 +19,6 @@ class AuthController extends Controller
         ]);
     }
 
-    // POST /login - xử lý đăng nhập
     public function login()
     {
         $email = trim($_POST["email"] ?? "");
@@ -61,7 +59,6 @@ class AuthController extends Controller
         }
     }
 
-    // GET /register - hiển thị form đăng ký
     public function showRegister()
     {
         $this->render("auth/register", [
@@ -69,7 +66,6 @@ class AuthController extends Controller
         ]);
     }
 
-    // POST /register - xử lý đăng ký
     public function register()
     {
         $fullName = trim($_POST["full_name"] ?? "");
@@ -103,7 +99,6 @@ class AuthController extends Controller
         $this->redirect("/login");
     }
 
-    // GET /logout
     public function logout()
     {
         session_unset();

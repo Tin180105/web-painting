@@ -1,23 +1,14 @@
 <?php
 
-/**
- * Router - Front Controller pattern
- *
- * Mọi request đều đi qua public/index.php, được Router này
- * đối chiếu (method + path) với danh sách route đã đăng ký,
- * rồi gọi đúng Controller@method tương ứng.
- */
 class Router
 {
     private $routes = [];
 
-    // Đăng ký route GET
     public function get($path, $handler)
     {
         $this->addRoute("GET", $path, $handler);
     }
 
-    // Đăng ký route POST
     public function post($path, $handler)
     {
         $this->addRoute("POST", $path, $handler);
@@ -32,9 +23,6 @@ class Router
         ];
     }
 
-    // Tính base path để route hoạt động đúng dù project nằm ở thư mục con nào
-    // Ví dụ: http://localhost/web-painting/public/admin/categories
-    // -> basePath = /web-painting/public
     private function getBasePath()
     {
         $scriptDir = dirname($_SERVER["SCRIPT_NAME"]);
@@ -54,7 +42,6 @@ class Router
             $uri = "/";
         }
 
-        // Bỏ dấu "/" cuối (trừ khi uri gốc chỉ là "/")
         if ($uri !== "/" && substr($uri, -1) === "/") {
             $uri = rtrim($uri, "/");
         }
@@ -62,7 +49,6 @@ class Router
         return $uri;
     }
 
-    // Chạy router: tìm route khớp và gọi controller tương ứng
     public function dispatch()
     {
         $uri = $this->getUri();
@@ -74,13 +60,12 @@ class Router
                 continue;
             }
 
-            // Chuyển {id}, {slug}... thành pattern regex
             $pattern = preg_replace("#\{[a-zA-Z_]+\}#", "([^/]+)", $route["path"]);
             $pattern = "#^" . $pattern . "$#";
 
             if (preg_match($pattern, $uri, $matches)) {
 
-                array_shift($matches); // bỏ phần tử [0] (chuỗi khớp toàn bộ)
+                array_shift($matches);
 
                 [$controllerName, $action] = explode("@", $route["handler"]);
 

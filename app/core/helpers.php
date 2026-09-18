@@ -1,6 +1,5 @@
 <?php
 
-// Nhãn + màu hiển thị cho từng trạng thái đơn hàng (dùng chung cho các trang admin/orders và dashboard)
 function orderStatusMeta($status)
 {
     $map = [

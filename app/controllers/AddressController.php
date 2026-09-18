@@ -12,7 +12,6 @@ class AddressController extends Controller
         $this->addressModel = new Address($pdo);
     }
 
-    // GET /addresses - danh sách địa chỉ của customer đang đăng nhập
     public function index()
     {
         requireLogin();
@@ -25,7 +24,6 @@ class AddressController extends Controller
         ]);
     }
 
-    // GET /addresses/create - form thêm địa chỉ
     public function create()
     {
         requireLogin();
@@ -35,7 +33,6 @@ class AddressController extends Controller
         ]);
     }
 
-    // POST /addresses/create - xử lý thêm địa chỉ
     public function store()
     {
         requireLogin();
@@ -54,7 +51,6 @@ class AddressController extends Controller
         $this->redirect("/addresses");
     }
 
-    // GET /addresses/edit/{id} - form sửa địa chỉ
     public function edit($id)
     {
         requireLogin();
@@ -67,7 +63,6 @@ class AddressController extends Controller
         ]);
     }
 
-    // POST /addresses/edit/{id} - xử lý cập nhật địa chỉ
     public function update($id)
     {
         requireLogin();
@@ -89,7 +84,6 @@ class AddressController extends Controller
         $this->redirect("/addresses");
     }
 
-    // POST /addresses/delete - JS gọi AJAX khi bấm nút "Xóa"
     public function delete()
     {
         requireLogin();
@@ -110,7 +104,6 @@ class AddressController extends Controller
         ]);
     }
 
-    // POST /addresses/set-default - JS gọi AJAX khi bấm "Đặt làm mặc định"
     public function setDefault()
     {
         requireLogin();
@@ -131,7 +124,6 @@ class AddressController extends Controller
         ]);
     }
 
-    // Lấy + validate dữ liệu form (dùng chung cho store/update). Trả null nếu thiếu trường bắt buộc.
     private function getFormData()
     {
         $receiverName = trim($_POST["receiver_name"] ?? "");
@@ -153,7 +145,6 @@ class AddressController extends Controller
         ];
     }
 
-    // Lấy địa chỉ theo ID và kiểm tra thuộc đúng user đang đăng nhập, nếu không thì dừng luôn
     private function getOwnedAddressOrDie($id)
     {
         $address = $this->addressModel->getById($id);

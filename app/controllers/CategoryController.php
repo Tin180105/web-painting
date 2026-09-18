@@ -12,7 +12,6 @@ class CategoryController extends Controller
         $this->categoryModel = new Category($pdo);
     }
 
-    // GET /admin/categories - danh sách category
     public function index()
     {
         requireAdmin();
@@ -25,7 +24,6 @@ class CategoryController extends Controller
         ]);
     }
 
-        // GET /admin/categories/create - hiển thị form thêm
     public function create()
     {
         requireAdmin();
@@ -36,7 +34,6 @@ class CategoryController extends Controller
             "pageTitle" => "Thêm danh mục"
         ]);
     }
-    // POST /admin/categories/create - xử lý thêm category
     public function store()
     {
         requireAdmin();
@@ -70,7 +67,6 @@ class CategoryController extends Controller
     }
 
 
-    // GET /admin/categories/edit/{id} - hiển thị form sửa
     public function edit($id)
     {
         requireAdmin();
@@ -89,7 +85,6 @@ class CategoryController extends Controller
         ]);
     }
 
-// POST /admin/categories/edit/{id} - xử lý cập nhật
 public function update($id)
 {
     requireAdmin();
@@ -118,7 +113,6 @@ public function update($id)
     $this->redirect("/admin/categories");
 }
 
-    // GET /admin/categories/delete/{id} - xử lý xóa
     public function delete($id)
     {
         requireAdmin();

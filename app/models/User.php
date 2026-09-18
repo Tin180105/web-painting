@@ -9,7 +9,6 @@ class User
         $this->pdo = $pdo;
     }
 
-    // Tìm user theo email
     public function findByEmail($email)
     {
         $sql = "SELECT *
@@ -26,7 +25,6 @@ class User
         return $stmt->fetch();
     }
 
-    // Tạo customer mới
     public function create($fullName, $email, $password, $phone)
     {
         $passwordHash = password_hash(
@@ -49,7 +47,6 @@ class User
         ]);
     }
 
-        // Lấy tất cả user (dùng cho admin), có thể tìm theo tên/email
     public function getAll($keyword = "")
     {
         $sql = "SELECT * FROM users WHERE 1=1";
@@ -68,7 +65,6 @@ class User
         return $stmt->fetchAll();
     }
 
-    // Chi tiết 1 user theo ID
     public function getById($id)
     {
         $sql = "SELECT * FROM users WHERE user_id = :id";
@@ -79,7 +75,6 @@ class User
         return $stmt->fetch();
     }
 
-    // Tạo tài khoản mới do admin thêm (cho phép chọn role)
     public function createByAdmin($fullName, $email, $password, $phone, $role)
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -100,7 +95,6 @@ class User
         ]);
     }
 
-    // Cập nhật thông tin tài khoản (dùng cho admin)
     public function updateProfile($id, $fullName, $email, $phone, $role)
     {
         $sql = "UPDATE users
@@ -118,7 +112,6 @@ class User
         ]);
     }
 
-    // Đổi mật khẩu tài khoản (dùng cho admin, chỉ gọi khi có nhập mật khẩu mới)
     public function updatePassword($id, $password)
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -133,7 +126,6 @@ class User
         ]);
     }
 
-    // Xóa tài khoản (dùng cho admin)
     public function delete($id)
     {
         $sql = "DELETE FROM users WHERE user_id = :id";
@@ -143,7 +135,6 @@ class User
         return $stmt->execute([":id" => $id]);
     }
 
-    // Khóa / mở khóa tài khoản (dùng cho admin)
     public function updateStatus($id, $status)
     {
         $sql = "UPDATE users SET status = :status WHERE user_id = :id";
@@ -156,7 +147,6 @@ class User
         ]);
     }
 
-    // Đếm tổng số user (dùng cho dashboard nếu cần sau này)
     public function countAll()
     {
         $sql = "SELECT COUNT(*) AS total FROM users";

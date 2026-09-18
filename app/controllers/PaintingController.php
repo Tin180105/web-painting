@@ -21,7 +21,6 @@ class PaintingController extends Controller
         $this->paintingImageModel = new PaintingImage($pdo);
     }
 
-    // GET / - Trang chủ client: danh sách tranh, lọc theo danh mục/từ khóa/sắp xếp
     public function index()
     {
         $categoryId = $_GET["category_id"] ?? "";
@@ -46,7 +45,6 @@ class PaintingController extends Controller
         ]);
     }
 
-    // GET /products/{id} - Chi tiết 1 tranh
     public function show($id)
     {
         $painting = $this->paintingModel->getById($id);
@@ -58,8 +56,6 @@ class PaintingController extends Controller
 
         $gallery = $this->paintingImageModel->getByPaintingId($id);
 
-        // Gộp ảnh đại diện + các ảnh trong thư viện vào 1 mảng duy nhất.
-        // Bỏ qua ảnh bị trùng, ảnh rỗng, và ảnh đã mất file vật lý trên server (dữ liệu cũ/hỏng)
         $images = [];
 
         if (!empty($painting["image"]) && !$this->isLocalImageMissing($painting["image"])) {
@@ -70,11 +66,11 @@ class PaintingController extends Controller
             $path = $img["image_path"];
 
             if (in_array($path, $images, true)) {
-                continue; // ảnh này đã có trong danh sách rồi
+                continue;
             }
 
             if ($this->isLocalImageMissing($path)) {
-                continue; // ảnh đã bị mất file trên server, không hiển thị
+                continue;
             }
 
             $images[] = $path;
@@ -88,8 +84,6 @@ class PaintingController extends Controller
         ]);
     }
 
-    // Kiểm tra ảnh có phải ảnh local do hệ thống upload nhưng file vật lý đã bị mất không.
-    // Ảnh link ngoài (không thuộc /uploads/paintings/) luôn được coi là hợp lệ, không kiểm tra.
     private function isLocalImageMissing($path)
     {
         if (empty($path)) {
@@ -107,7 +101,6 @@ class PaintingController extends Controller
         return !is_file($fullPath);
     }
 
-    // Đếm số lượng sản phẩm trong giỏ (hiển thị badge trên navbar), trả 0 nếu chưa đăng nhập
     private function getCartCount()
     {
         if (!isset($_SESSION["user_id"])) {

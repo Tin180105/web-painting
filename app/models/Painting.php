@@ -9,8 +9,6 @@ class Painting
         $this->pdo = $pdo;
     }
 
-    // Lấy danh sách tranh (dùng cho trang danh sách sản phẩm client)
-    // $filters: category_id, keyword, sort (newest|price_asc|price_desc)
     public function getAll($filters = [])
     {
         $sql = "SELECT p.*, c.category_name
@@ -26,7 +24,7 @@ class Painting
         }
 
         if (!empty($filters["keyword"])) {
-            $sql .= " AND p.painting_name COLLATE utf8mb4_bin LIKE :keyword";
+            $sql .= " AND LOWER(p.painting_name) COLLATE utf8mb4_bin LIKE LOWER(:keyword) COLLATE utf8mb4_bin";
             $params[":keyword"] = "%" . $filters["keyword"] . "%";
         }
 
@@ -47,7 +45,6 @@ class Painting
         return $stmt->fetchAll();
     }
 
-    // Chi tiết 1 tranh theo ID
     public function getById($id)
     {
         $sql = "SELECT p.*, c.category_name
@@ -77,7 +74,6 @@ class Painting
     return $stmt->fetchAll();
 }
 
-    // Thêm tranh (dùng cho phần quản lý sản phẩm - admin)
     public function create($data)
     {
         $sql = "INSERT INTO paintings
@@ -104,7 +100,6 @@ class Painting
         return (int) $this->pdo->lastInsertId();
     }
 
-    // Sửa tranh (dùng cho phần quản lý sản phẩm - admin)
     public function update($id, $data)
     {
         $sql = "UPDATE paintings SET
@@ -139,7 +134,6 @@ class Painting
         ]);
     }
 
-    // Cập nhật riêng ảnh đại diện (dùng khi ảnh đại diện bị xóa khỏi thư viện ảnh, cần đổi sang ảnh khác)
     public function updateImage($id, $image)
     {
         $sql = "UPDATE paintings SET image = :image WHERE painting_id = :id";
@@ -151,7 +145,6 @@ class Painting
         ]);
     }
 
-    // Xóa tranh (dùng cho phần quản lý sản phẩm - admin)
     public function delete($id)
     {
         $sql = "DELETE FROM paintings WHERE painting_id = :id";
@@ -163,7 +156,6 @@ class Painting
         ]);
     }
 
-    // Giảm số lượng tồn kho (dùng khi đặt hàng thành công)
     public function decreaseStock($id, $quantity)
     {
         $sql = "UPDATE paintings

@@ -9,7 +9,6 @@ class Address
         $this->pdo = $pdo;
     }
 
-    // Lấy tất cả địa chỉ của 1 user, địa chỉ mặc định hiển thị lên đầu
     public function getAllByUserId($userId)
     {
         $sql = "SELECT *
@@ -23,7 +22,6 @@ class Address
         return $stmt->fetchAll();
     }
 
-    // Chi tiết 1 địa chỉ theo ID
     public function getById($id)
     {
         $sql = "SELECT * FROM addresses WHERE address_id = :id";
@@ -34,7 +32,6 @@ class Address
         return $stmt->fetch();
     }
 
-    // Đếm số địa chỉ hiện có của user (dùng để tự đặt mặc định cho địa chỉ đầu tiên)
     public function countByUserId($userId)
     {
         $sql = "SELECT COUNT(*) AS total FROM addresses WHERE user_id = :user_id";
@@ -45,10 +42,8 @@ class Address
         return (int) $stmt->fetch()["total"];
     }
 
-    // Thêm địa chỉ mới
     public function create($userId, $data)
     {
-        // Nếu đây là địa chỉ đầu tiên của user -> tự động đặt làm mặc định
         $isDefault = !empty($data["is_default"]) || $this->countByUserId($userId) === 0;
 
         if ($isDefault) {
@@ -74,7 +69,6 @@ class Address
         ]);
     }
 
-    // Sửa địa chỉ
     public function update($id, $userId, $data)
     {
         if (!empty($data["is_default"])) {
@@ -106,7 +100,6 @@ class Address
         ]);
     }
 
-    // Xóa địa chỉ (kèm điều kiện user_id để chống xóa địa chỉ người khác)
     public function delete($id, $userId)
     {
         $sql = "DELETE FROM addresses WHERE address_id = :id AND user_id = :user_id";
@@ -119,7 +112,6 @@ class Address
         ]);
     }
 
-    // Đặt 1 địa chỉ làm mặc định (bỏ mặc định của các địa chỉ khác trước)
     public function setDefault($id, $userId)
     {
         $this->clearDefault($userId);
@@ -136,7 +128,6 @@ class Address
         ]);
     }
 
-    // Bỏ mặc định toàn bộ địa chỉ của user (dùng nội bộ trước khi set 1 địa chỉ khác làm mặc định)
     private function clearDefault($userId)
     {
         $sql = "UPDATE addresses SET is_default = 0 WHERE user_id = :user_id";

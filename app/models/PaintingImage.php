@@ -9,7 +9,6 @@ class PaintingImage
         $this->pdo = $pdo;
     }
 
-    // Lấy tất cả ảnh phụ của 1 tranh, theo thứ tự
     public function getByPaintingId($paintingId)
     {
         $sql = "SELECT * FROM painting_images WHERE painting_id = :painting_id ORDER BY sort_order ASC, image_id ASC";
@@ -20,7 +19,6 @@ class PaintingImage
         return $stmt->fetchAll();
     }
 
-    // Thêm nhiều ảnh cùng lúc cho 1 tranh (dùng khi thêm/sửa sản phẩm)
     public function addImages($paintingId, array $imagePaths)
     {
         if (empty($imagePaths)) {

@@ -18,7 +18,6 @@ class AdminController extends Controller
         $this->categoryModel = new Category($pdo);
     }
 
-    // GET /admin/dashboard - trang tổng quan sau khi admin đăng nhập
         public function dashboard()
     {
         requireAdmin();
@@ -53,7 +52,6 @@ class AdminController extends Controller
             }
         }
 
-        // ==== Dữ liệu biểu đồ doanh số theo tháng ====
         $availableYears = $this->orderModel->getYearsWithOrders();
 
         if (empty($availableYears)) {

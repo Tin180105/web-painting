@@ -9,7 +9,6 @@ class Order
         $this->pdo = $pdo;
     }
 
-    // Tạo đơn hàng mới, trả về order_id vừa tạo
     public function create($userId, $addressId, $totalAmount, $paymentMethod, $note)
     {
         $sql = "INSERT INTO orders
@@ -30,7 +29,6 @@ class Order
         return $this->pdo->lastInsertId();
     }
 
-    // Thêm 1 dòng chi tiết đơn hàng (snapshot giá tại thời điểm đặt)
     public function addDetail($orderId, $paintingId, $quantity, $price)
     {
         $sql = "INSERT INTO order_details
@@ -48,7 +46,6 @@ class Order
         ]);
     }
 
-    // Chi tiết 1 đơn hàng theo ID (kèm thông tin địa chỉ giao hàng)
     public function getById($id)
     {
         $sql = "SELECT o.*, a.receiver_name, a.phone, a.address_detail, a.ward, a.district, a.province
@@ -62,7 +59,6 @@ class Order
         return $stmt->fetch();
     }
 
-    // Lấy đơn hàng theo ID, kèm điều kiện thuộc đúng user (chống xem đơn người khác)
     public function getByIdAndUser($id, $userId)
     {
         $order = $this->getById($id);
@@ -74,7 +70,6 @@ class Order
         return $order;
     }
 
-    // Danh sách đơn hàng của 1 user, mới nhất lên đầu
     public function getAllByUserId($userId)
     {
         $sql = "SELECT * FROM orders WHERE user_id = :user_id ORDER BY order_id DESC";
@@ -85,7 +80,6 @@ class Order
         return $stmt->fetchAll();
     }
 
-    // Danh sách toàn bộ đơn hàng (dùng cho admin), lọc theo status nếu có
     public function getAll($status = "")
     {
         $sql = "SELECT o.*, u.full_name, u.email
@@ -107,7 +101,6 @@ class Order
         return $stmt->fetchAll();
     }
 
-    // Danh sách sản phẩm trong 1 đơn hàng
     public function getDetails($orderId)
     {
         $sql = "SELECT od.*, p.painting_name, p.image
@@ -121,7 +114,6 @@ class Order
         return $stmt->fetchAll();
     }
 
-    // Đánh dấu đơn hàng thanh toán thành công (chỉ áp dụng khi đang unpaid)
     public function markPaid($orderId)
     {
         $sql = "UPDATE orders
@@ -133,7 +125,6 @@ class Order
         return $stmt->execute([":id" => $orderId]);
     }
 
-    // Cập nhật trạng thái đơn hàng (dùng cho admin)
     public function updateStatus($orderId, $status)
     {
         $sql = "UPDATE orders SET status = :status WHERE order_id = :id";
@@ -146,8 +137,6 @@ class Order
         ]);
     }
 
-        // Doanh thu theo từng tháng trong 1 năm (chỉ tính đơn đã thanh toán)
-    // Trả về mảng 12 phần tử [1 => revenue, 2 => revenue, ..., 12 => revenue]
     public function getMonthlyRevenue($year)
     {
         $sql = "SELECT MONTH(created_at) AS month, SUM(total_amount) AS revenue
@@ -160,7 +149,6 @@ class Order
 
         $rows = $stmt->fetchAll();
 
-        // Khởi tạo đủ 12 tháng = 0, tránh thiếu tháng không có đơn
         $result = array_fill(1, 12, 0);
 
         foreach ($rows as $row) {
@@ -170,7 +158,6 @@ class Order
         return $result;
     }
 
-    // Danh sách các năm có phát sinh đơn hàng (dùng cho dropdown lọc năm)
     public function getYearsWithOrders()
     {
         $sql = "SELECT DISTINCT YEAR(created_at) AS year

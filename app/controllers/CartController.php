@@ -17,7 +17,6 @@ class CartController extends Controller
         $this->paintingModel = new Painting($pdo);
     }
 
-    // GET /cart - trang xem giỏ hàng
     public function index()
     {
         requireLogin();
@@ -34,7 +33,6 @@ class CartController extends Controller
         ]);
     }
 
-    // POST /cart/add - JS gọi AJAX khi bấm "Thêm vào giỏ" (ở trang chủ hoặc trang chi tiết)
     public function add()
     {
         requireLogin();
@@ -66,7 +64,6 @@ class CartController extends Controller
         ]);
     }
 
-    // POST /cart/update - JS gọi AJAX khi bấm nút +/- số lượng trong giỏ hàng
     public function update()
     {
         requireLogin();
@@ -81,7 +78,6 @@ class CartController extends Controller
             $this->json(["success" => false, "message" => "Không tìm thấy sản phẩm trong giỏ"], 404);
         }
 
-        // Số lượng <= 0 -> coi như xóa luôn sản phẩm này
         if ($quantity < 1) {
             $this->cartModel->removeItem($cartDetailId, $cartId);
 
@@ -108,7 +104,6 @@ class CartController extends Controller
         ]);
     }
 
-    // POST /cart/delete - JS gọi AJAX khi bấm nút "Xóa" 1 sản phẩm khỏi giỏ
     public function delete()
     {
         requireLogin();

@@ -12,7 +12,6 @@ class AdminOrderController extends Controller
         $this->orderModel = new Order($pdo);
     }
 
-    // GET /admin/orders - danh sách đơn hàng, lọc theo status
     public function index()
     {
         requireAdmin();
@@ -28,7 +27,6 @@ class AdminOrderController extends Controller
         ]);
     }
 
-    // GET /admin/orders/{id} - chi tiết đơn hàng
     public function show($id)
     {
         requireAdmin();
@@ -48,7 +46,6 @@ class AdminOrderController extends Controller
         ]);
     }
 
-    // POST /admin/orders/{id}/status - cập nhật trạng thái đơn hàng
     public function updateStatus($id)
     {
         requireAdmin();
